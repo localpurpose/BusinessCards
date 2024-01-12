@@ -1,0 +1,62 @@
+// Hosts
+
+    //upper then main func
+    type (
+        Host struct {
+            Fiber *fiber.App
+        }
+    )
+
+	hosts := map[string]*Host{}
+
+	//-----
+	// API
+	//-----
+
+	api := fiber.New()
+
+	hosts["api.localhost"] = &Host{api}
+
+	api.Get("/", func(c *fiber.Ctx) error {
+		c.SendString("API")
+		return nil
+	})
+
+	//------
+	// Blog
+	//------
+
+	blog := fiber.New()
+
+	hosts["blog.localhost"] = &Host{blog}
+
+	blog.Get("/", func(c *fiber.Ctx) error {
+		c.SendString("Blog")
+		return nil
+	})
+
+	//---------
+	// Website
+	//---------
+
+	site := fiber.New()
+
+	hosts["localhost"] = &Host{site}
+
+	site.Get("/", func(c *fiber.Ctx) error {
+		c.SendString("Website")
+		return nil
+	})
+
+	// Server
+	app := fiber.New()
+	app.Use(func(c *fiber.Ctx) error {
+		host := hosts[c.Hostname()]
+		if host == nil {
+			return c.SendStatus(fiber.StatusNotFound)
+		} else {
+			host.Fiber.Handler()(c.Context())
+			return nil
+		}
+	})
+	log.Fatal(app.Listen("localhost:80"))
