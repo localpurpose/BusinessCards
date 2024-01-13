@@ -34,7 +34,7 @@ func Setup(app *fiber.App) {
 		main = fiber.New(fiber.Config{
 			Views: engine,
 		})
-		return c.Render("index", ".html")
+		return c.Render("idex", ".html")
 	})
 
 	//------------------------------------------------
