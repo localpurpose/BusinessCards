@@ -1,1 +1,1 @@
-screen.availHeight
+file("seregalog")
