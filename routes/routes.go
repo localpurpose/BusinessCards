@@ -5,6 +5,7 @@ import (
 	"github.com/buscard/controller"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/log"
+	"github.com/gofiber/template/html/v2"
 )
 
 type (
@@ -27,8 +28,12 @@ func Setup(app *fiber.App) {
 	main := fiber.New()
 	hosts["localhost"] = &Host{main}
 
-	main.Get("/", func(c *fiber.Ctx) error {
-		main.Static("assets/", "./views/assets/brown")
+	main.Get("/1", func(c *fiber.Ctx) error {
+		engine := html.New("./views/brownView", ".html")
+		main.Static("assets/", "./views/brownView/assets")
+		main = fiber.New(fiber.Config{
+			Views: engine,
+		})
 		return c.Render("index", ".html")
 	})
 
