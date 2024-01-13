@@ -21,14 +21,15 @@ func Setup(app *fiber.App) {
 	hosts["api.localhost"] = &Host{api}
 
 	//------------------------------------------------
-	// Main page
+	// Main domain
 	//------------------------------------------------
 
 	main := fiber.New()
 	hosts["localhost"] = &Host{main}
 
 	main.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("hello from main.page")
+		main.Static("assets/", "./views/assets/brown")
+		return c.Render("index", ".html")
 	})
 
 	//------------------------------------------------
