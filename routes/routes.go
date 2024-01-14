@@ -38,7 +38,8 @@ func Setup(app *fiber.App) {
 	app.Get("/api/user/:userid", controller.GetDetails)
 
 	app.Get("/:userid", func(c *fiber.Ctx) error {
-		err := c.Render("brownView/index", fiber.Map{
+
+		err := c.Render("pinkView/index", fiber.Map{
 			"Title": "Brown",
 		})
 		if err != nil {
