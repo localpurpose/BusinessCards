@@ -26,55 +26,66 @@
                     <p class="subtitle">
                         {{.Desk}}
                     </p>
-
                 </div>
 
-
                 <div class="links__container">
-                    <label for="">Организация, должность</label>
-                    <p class="org text">
-                        <i class="fa-solid fa-building fa-lg" style="color: #F37021;"></i>
-                        <span class="typing-animation contact">{{.Org}}</span>
-                    </p>
+                    <div class="column">
+                        <label for="org">Организация, должность</label>
+                        <p class="org text" id="org">
+                            <i class="fa-solid fa-building fa-lg" style="color: #F37021;"></i>
+                            <span class="typing-animation contact org__span">{{.Org}}</span>
+                        </p>
+                    </div>
+
                     <hr class="divider top_divider">
 
-                    <label for="#">Телефон</label>
-                    <a href="tel:{{.PhoneNumber}}" class="phone text">
-                        <i class="fa-solid fa-phone fa-lg" style="color: #F37021;"></i>
-                        <span class="typing-animation contact">{{.PhoneNumber}}</span>
-                    </a>
+                    <div class="column">
+                        <label for="tel">Телефон</label>
+                        <a href="tel:{{.PhoneNumber}}" class="phone text" id="tel">
+                            <i class="fa-solid fa-phone fa-lg" style="color: #F37021;"></i>
+                            <span class="typing-animation contact">{{.PhoneNumber}}</span>
+                        </a>
+                    </div>
 
                     <hr class="divider">
 
-                    <label for="#">Почта</label>
-                    <a href="mailto:{{.EmailAddress}}" class="email text">
-                        <i class="fa-solid fa-envelope fa-lg" style="color: #F37021;"></i>
-                        <span class="typing-animation contact">{{.EmailAddress}}</span>
-                    </a>
+                    <div class="column">
+                        <label for="email">Почта</label>
+                        <a href="mailto:{{.EmailAddress}}" class="email text" id="email">
+                            <i class="fa-solid fa-envelope fa-lg" style="color: #F37021;"></i>
+                            <span class="typing-animation contact">{{.EmailAddress}}</span>
+                        </a>
+                    </div>
 
                     <hr class="divider">
 
-                    <label for="#">Вебсайт</label>
-                    <a href="{{.WebSite}}" class="website text" target="_blank">
-                        <i class="fa-solid fa-earth-americas fa-lg" style="color: #F37021;"></i>
-                        <span class="typing-animation contact">{{.WebSite}}</span>
-                    </a>
+                    <div class="column">
+                        <label for="website">Вебсайт</label>
+                        <a href="{{.WebSite}}" class="website text" target="_blank" id="website">
+                            <i class="fa-solid fa-earth-americas fa-lg" style="color: #F37021;"></i>
+                            <span class="typing-animation contact">{{.WebSite}}</span>
+                        </a>
+                    </div>
 
                     <hr class="divider">
 
-                    <label for="#">Telegram</label>
-                    <a href="https://t.me/{{.TgName}}" class="telegram text" target="_blank">
-                        <i class="fa-solid fa-paper-plane fa-lg" style="color: #F37021;"></i>
-                        <span class="typing-animation contact">@{{.TgName}}</span>
-                    </a>
+                    <div class="column">
+                        <label for="tg">Telegram</label>
+                        <a href="https://t.me/{{.TgName}}" class="telegram text" target="_blank" id="tg">
+                            <i class="fa-solid fa-paper-plane fa-lg" style="color: #F37021;"></i>
+                            <span class="typing-animation contact">@{{.TgName}}</span>
+                        </a>
+                    </div>
 
                     <hr class="divider">
 
-                    <label for="#">WhatsApp</label>
-                    <a href="https://wa.me/{{.WhatsApp}}" class="whatsapp text" target="_blank">
-                        <i class="fa-brands fa-square-whatsapp fa-xl" style="color: #F37021;"></i>
-                        <span class="typing-animation contact">{{.WhatsApp}}</span>
-                    </a>
+                    <div class="column">
+                        <label for="whatsapp">WhatsApp</label>
+                        <a href="https://wa.me/{{.WhatsApp}}" class="whatsapp text" target="_blank" id="whatsapp">
+                            <i class="fa-brands fa-square-whatsapp fa-xl" style="color: #F37021;"></i>
+                            <span class="typing-animation contact">{{.WhatsApp}}</span>
+                        </a>
+                    </div>
 
                     <hr class="divider">
                 </div>
