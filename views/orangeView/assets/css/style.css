@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata');
 
 body {
-    background-color:#EEE2DC;
+    background-color:#002942;
     margin: 0;
     padding: 0;
     font-family: 'Open Sans', sans-serif;
@@ -33,14 +33,14 @@ body {
 .main .container .title__container h1{
     font-size: 30px;
     font-weight: 600;
-    color: #123C69;
+    color: #FFFFFF;
     margin: 0;
 }
 .main .container .title__container p{
     font-size: 18px;
     color: gray;
     font-weight: 400;
-    color: #123C69;
+    color: #FFFFFF;
     margin: 0;
 }
 .main .container .title__container .title__divider{
@@ -49,7 +49,7 @@ body {
 .divider {
     width: 100%;
     height: 1px;
-    background-color: #AC3B61;
+    background-color: #F37021;
     margin: 5px 0;
     border: none;
 }
@@ -74,7 +74,7 @@ body {
 }
 .main .container .links__container label{
     margin-left: 45px;
-    color: #AC3B61;
+    color: #ff8438;
     font-size: 14px;
     margin-bottom: -5px;
 }
@@ -85,7 +85,7 @@ body {
     left: 10px;
 }
 .main .container .links__container .text span{
-    color:  #123C69;
+    color:  white;
 }
 .main .container .qr__container{
     display: flex;
@@ -96,8 +96,8 @@ body {
     width: 90%;
     margin: 10px auto;
     text-align: center;
-    background-color: #dbb9aa;
-    border: 1px solid #dbb9aa;
+    background-color: #F37021;
+    border: 1px solid #F37021;
     border-radius: 10px;
     margin-top: 15px;
     padding: 10px;
@@ -107,12 +107,12 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 .main .container .add__btn:hover{
-    background-color: #eecaba;
-    border-color: #eecaba;
+    background-color: #ff7722;
+    border-color: #ff7722;
     cursor: pointer;
 }
 .main .container .add__btn span{
-    color: #AC3B61;
+    color: #FFFFFF;
     text-decoration: none;
     font-size: 20px;
 }
