@@ -6,24 +6,33 @@ import (
 	"image/color"
 )
 
-//const (
-//	pink = 1, 167, 111, 83]
-//)
+var colors = map[string]color.Color{
+	"pink":   color.CMYK{C: 1, M: 167, Y: 111, K: 83},
+	"blue":   color.CMYK{C: 182, M: 79, K: 178},
+	"brown":  color.CMYK{M: 63, Y: 111, K: 170},
+	"orange": color.CMYK{M: 137, Y: 220, K: 12},
+}
 
-//pink = 1, 167, 111, 83
-//blue = 182, 79, 0, 178
-//brown = 0, 63, 111, 170
-//orange = 0, 137, 220, 12
+func GetColor(userColor string) color.Color {
+	c, ok := colors[userColor]
+	if !ok {
+		c = color.Transparent
+	}
+	return c
+}
 
-func qrGenerate(userColor string, url string) {
+func QrGenerate(userColor, url string, path string) {
+	c := GetColor(userColor)
+
 	err := qrcode.WriteColorFile(
-		"https://test.amasaetre.ru",
+		url,
 		qrcode.Medium, 128,
 		color.Transparent,
-		color.CMYK{0, 54, 86, 5},
-		"qr.png")
+		c,
+		path+"/qr.png",
+	)
+
 	if err != nil {
 		fmt.Println("error", err)
 	}
-
 }

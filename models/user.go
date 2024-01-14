@@ -12,6 +12,8 @@ type User struct {
 	WebSite      string    `json:"webSite"`
 	TelegramName string    `json:"telegram_name"`
 	WhatsApp     string    `json:"whatsApp"`
+	ImagePath    string    `json:"imagePath"`
+	QrPath       string    `json:"qrPath"`
 	CreatedAt    time.Time `json:"created_at"`
 	LastUpdate   time.Time `json:"last_update"`
 }

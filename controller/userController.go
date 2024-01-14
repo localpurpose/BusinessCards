@@ -3,8 +3,11 @@ package controller
 import (
 	db "github.com/buscard/config"
 	models "github.com/buscard/models"
+	"github.com/buscard/utils"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/log"
+	"os"
+	"strings"
 	"time"
 )
 
@@ -38,12 +41,19 @@ func CreateUser(c *fiber.Ctx) error {
 	// Save User in the Database
 	user := models.User{
 		Name:         data["name"],
+		Description:  data["desc"],
+		Organization: data["org"],
+		PhoneNumber:  data["phone_number"],
+		Email:        data["email"],
+		WebSite:      data["website"],
 		TelegramName: data["tg_name"],
+		WhatsApp:     data["whatsApp"],
 		CreatedAt:    time.Now(),
 		LastUpdate:   time.Now(),
 	}
 
 	db.DB.Create(&user)
+
 	return c.Status(200).JSON(fiber.Map{
 		"success": true,
 		"message": "User created!",
@@ -139,8 +149,9 @@ func RenderUserProfile(c *fiber.Ctx) error {
 	userId := c.Params("userid")
 	var user models.User
 	var userSettings models.UserSettings
+	var path string
 
-	db.DB.Select("id, name, telegram_name, organization, phone_number, email, web_site, whats_app, description").Where("id = ?", userId).First(&user)
+	db.DB.Select("id, name, telegram_name, organization, phone_number, email, web_site, whats_app, description, qr_path, image_path").Where("id = ?", userId).First(&user)
 	db.DB.Select("theme").Where("user_id = ?", userId).First(&userSettings)
 
 	if user.Id == 0 {
@@ -155,6 +166,19 @@ func RenderUserProfile(c *fiber.Ctx) error {
 		})
 	}
 
+	path = "usersData/" + userId
+	if !utils.PathExists(path) {
+		err := os.Mkdir(path, 0755)
+		utils.QrGenerate(userSettings.Theme, "http://localhost/"+userId, path)
+		if err != nil {
+			log.Info(err)
+		}
+
+		user.QrPath = strings.Split(path, "/")[1]
+		log.Info()
+		db.DB.Save(&user)
+	}
+
 	userDataMap := fiber.Map{
 		"Title":        user.Name,
 		"Name":         user.Name,
@@ -165,10 +189,9 @@ func RenderUserProfile(c *fiber.Ctx) error {
 		"WebSite":      user.WebSite,
 		"TgName":       user.TelegramName,
 		"WhatsApp":     user.WhatsApp,
+		"QrPath":       user.QrPath,
+		"ImagePath":    user.ImagePath,
 	}
-
-	//log.Info(userDataMap)
-	//log.Info(userSettings.Theme)
 
 	if userSettings.Theme == "brown" {
 		return c.Render("brownView/index", userDataMap)

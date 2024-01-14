@@ -18,6 +18,7 @@ func main() {
 	app.Static("assets/blueView/", "./views/blueView/assets")
 	app.Static("assets/orangeView/", "./views/orangeView/assets")
 	app.Static("assets/pinkView/", "./views/pinkView/assets")
+	app.Static("assets/qrs/", "./usersData")
 
 	routes.Setup(app)
 	log.Fatal(app.Listen(":80"))
