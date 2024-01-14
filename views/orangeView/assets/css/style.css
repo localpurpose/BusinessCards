@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Roboto:wght@300;400;700&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Inconsolata');
-
 body {
     background-color:#002942;
     margin: 0;
@@ -27,7 +25,7 @@ body {
     width: fit-content;
     text-align: center;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 10px;
     width: 95%;
 }
 .main .container .title__container h1{
@@ -38,7 +36,6 @@ body {
 }
 .main .container .title__container p{
     font-size: 18px;
-    color: gray;
     font-weight: 400;
     color: #FFFFFF;
     margin: 0;
@@ -59,11 +56,17 @@ body {
     text-decoration: none;
     width: 90%;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 30px;
+}
+.main .container .links__container .column{
+    display: flex;
+    flex-direction: column;
 }
 .main .container .links__container .text{
+    display: flex;
+    flex-direction: row;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 17px;
     margin: 0;
     padding-top: 2.5px;
     padding-bottom: 2.5px;
@@ -71,6 +74,9 @@ body {
 .main .container .links__container .org{
     padding-left: 3px;
     text-align: start;
+}
+.main .container .links__container .org .org__span{
+    padding-left: 6px;
 }
 .main .container .links__container label{
     margin-left: 45px;
@@ -81,11 +87,12 @@ body {
 .main .container .links__container .text i{
     padding-right: 20px;
     position: relative;
-    top: -8px;
+    top: 4px;
     left: 10px;
 }
 .main .container .links__container .text span{
-    color:  white;
+    padding-left: 4px;
+    color:  #FFFFFF;
 }
 .main .container .qr__container{
     display: flex;
@@ -100,6 +107,7 @@ body {
     border: 1px solid #F37021;
     border-radius: 10px;
     margin-top: 15px;
+    margin-bottom: 15px;
     padding: 10px;
     -webkit-box-shadow: 4px 4px 8px 0px rgba(135, 118, 104, 0.2);
     -moz-box-shadow: 4px 4px 8px 0px rgba(135, 118, 104, 0.2);
@@ -112,7 +120,7 @@ body {
     cursor: pointer;
 }
 .main .container .add__btn span{
-    color: #FFFFFF;
+    color: #E4E5EA;
     text-decoration: none;
     font-size: 20px;
 }
@@ -125,7 +133,7 @@ body {
     display: block;
     unicode-bidi: isolate;
     overflow: hidden;
-    animation: hrAppear 5.2s ease-out forwards;
+    animation: hrAppear 3s ease-out forwards;
 }
 @keyframes hrAppear {
     from {
