@@ -26,23 +26,22 @@
                     <p class="subtitle">
                         {{.Desk}}
                     </p>
-
                 </div>
-
 
                 <div class="links__container">
                     <div class="column">
-                        <label for="">Организация, должность</label>
-                        <p class="org text">
+                        <label for="org">Организация, должность</label>
+                        <p class="org text" id="org">
                             <i class="fa-solid fa-building fa-lg" style="color: #72685e;"></i>
-                            <span class="typing-animation contact">{{.Org}}</span>
+                            <span class="typing-animation contact org__span">{{.Org}}</span>
                         </p>
                     </div>
+
                     <hr class="divider top_divider">
 
                     <div class="column">
-                        <label for="#">Телефон</label>
-                        <a href="tel:{{.PhoneNumber}}" class="phone text">
+                        <label for="tel">Телефон</label>
+                        <a href="tel:{{.PhoneNumber}}" class="phone text" id="tel">
                             <i class="fa-solid fa-phone fa-lg" style="color: #72685e;"></i>
                             <span class="typing-animation contact">{{.PhoneNumber}}</span>
                         </a>
@@ -51,8 +50,8 @@
                     <hr class="divider">
 
                     <div class="column">
-                        <label for="#">Почта</label>
-                        <a href="mailto:{{.EmailAddress}}" class="email text">
+                        <label for="email">Почта</label>
+                        <a href="mailto:{{.EmailAddress}}" class="email text" id="email">
                             <i class="fa-solid fa-envelope fa-lg" style="color: #72685e;"></i>
                             <span class="typing-animation contact">{{.EmailAddress}}</span>
                         </a>
@@ -61,8 +60,8 @@
                     <hr class="divider">
 
                     <div class="column">
-                        <label for="#">Вебсайт</label>
-                        <a href="{{.WebSite}}" class="website text" target="_blank">
+                        <label for="website">Вебсайт</label>
+                        <a href="{{.WebSite}}" class="website text" target="_blank" id="website">
                             <i class="fa-solid fa-earth-americas fa-lg" style="color: #72685e;"></i>
                             <span class="typing-animation contact">{{.WebSite}}</span>
                         </a>
@@ -71,8 +70,8 @@
                     <hr class="divider">
 
                     <div class="column">
-                        <label for="#">Telegram</label>
-                        <a href="https://t.me/{{.TgName}}" class="telegram text" target="_blank">
+                        <label for="tg">Telegram</label>
+                        <a href="https://t.me/{{.TgName}}" class="telegram text" target="_blank" id="tg">
                             <i class="fa-solid fa-paper-plane fa-lg" style="color: #72685e;"></i>
                             <span class="typing-animation contact">@{{.TgName}}</span>
                         </a>
@@ -81,8 +80,8 @@
                     <hr class="divider">
 
                     <div class="column">
-                        <label for="#">WhatsApp</label>
-                        <a href="https://wa.me/{{.WhatsApp}}" class="whatsapp text" target="_blank">
+                        <label for="whatsapp">WhatsApp</label>
+                        <a href="https://wa.me/{{.WhatsApp}}" class="whatsapp text" target="_blank" id="whatsapp">
                             <i class="fa-brands fa-square-whatsapp fa-xl" style="color: #72685e;"></i>
                             <span class="typing-animation contact">{{.WhatsApp}}</span>
                         </a>
