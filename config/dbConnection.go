@@ -40,5 +40,6 @@ func Connect() {
 func AutoMigrate(conn *gorm.DB) {
 	conn.Debug().AutoMigrate(
 		&models.User{},
+		&models.UserSettings{},
 	)
 }

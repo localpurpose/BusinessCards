@@ -4,6 +4,7 @@ import (
 	db "github.com/buscard/config"
 	models "github.com/buscard/models"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/log"
 	"time"
 )
 
@@ -132,4 +133,55 @@ func GetDetails(c *fiber.Ctx) error {
 		"message": "User Details",
 		"data":    userData,
 	})
+}
+
+func RenderUserProfile(c *fiber.Ctx) error {
+	userId := c.Params("userid")
+	var user models.User
+	var userSettings models.UserSettings
+
+	db.DB.Select("id, name, telegram_name, organization, phone_number, email, web_site, whats_app, description").Where("id = ?", userId).First(&user)
+	db.DB.Select("theme").Where("user_id = ?", userId).First(&userSettings)
+
+	if user.Id == 0 {
+		err := c.Redirect("/1")
+		if err != nil {
+			log.Info(err)
+		}
+		return c.Status(404).JSON(fiber.Map{
+			"success": false,
+			"message": "User not found",
+			"error":   map[string]interface{}{},
+		})
+	}
+
+	userDataMap := fiber.Map{
+		"Title":        user.Name,
+		"Name":         user.Name,
+		"Desk":         user.Description,
+		"Org":          user.Organization,
+		"PhoneNumber":  user.PhoneNumber,
+		"EmailAddress": user.Email,
+		"WebSite":      user.WebSite,
+		"TgName":       user.TelegramName,
+		"WhatsApp":     user.WhatsApp,
+	}
+
+	//log.Info(userDataMap)
+	//log.Info(userSettings.Theme)
+
+	if userSettings.Theme == "brown" {
+		return c.Render("brownView/index", userDataMap)
+	}
+	if userSettings.Theme == "blue" {
+		return c.Render("blueView/index", userDataMap)
+	}
+	if userSettings.Theme == "orange" {
+		return c.Render("orangeView/index", userDataMap)
+	}
+	if userSettings.Theme == "pink" {
+		return c.Render("pinkView/index", userDataMap)
+	}
+
+	return c.Redirect("/1")
 }

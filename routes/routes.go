@@ -1,10 +1,8 @@
 package routes
 
 import (
-	"fmt"
 	"github.com/buscard/controller"
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/log"
 )
 
 type (
@@ -16,19 +14,15 @@ type (
 func Setup(app *fiber.App) {
 
 	//------------------------------------------------
-	// app
+	// API
 	//------------------------------------------------
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		err := c.SendString("app")
-		if err != nil {
-			fmt.Println(err)
-		}
-		return nil
+		return c.Redirect("/1") // Redirect to the creator page
 	})
 
 	app.Get("/api", func(c *fiber.Ctx) error {
-		return c.SendString("api working")
+		return c.Redirect("/1") // Redirect to the creator page
 	})
 
 	app.Post("/api/user/create", controller.CreateUser)
@@ -37,14 +31,9 @@ func Setup(app *fiber.App) {
 
 	app.Get("/api/user/:userid", controller.GetDetails)
 
-	app.Get("/:userid", func(c *fiber.Ctx) error {
+	//------------------------------------------------
+	// Main Application
+	//------------------------------------------------
 
-		err := c.Render("pinkView/index", fiber.Map{
-			"Title": "Brown",
-		})
-		if err != nil {
-			log.Info(err)
-		}
-		return nil
-	})
+	app.Get("/:userid", controller.RenderUserProfile)
 }
