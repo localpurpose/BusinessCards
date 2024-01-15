@@ -20,6 +20,6 @@ func main() {
 	app.Static("assets/pinkView/", "./views/pinkView/assets")
 	app.Static("assets/qrs/", "./usersData")
 
-	routes.Setup(app)
+	routes.SetupDefaultRoutes(app)
 	log.Fatal(app.Listen(":80"))
 }

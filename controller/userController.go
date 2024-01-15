@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"encoding/base64"
 	db "github.com/buscard/config"
 	models "github.com/buscard/models"
 	"github.com/buscard/utils"
@@ -189,8 +190,7 @@ func RenderUserProfile(c *fiber.Ctx) error {
 		"WebSite":      user.WebSite,
 		"TgName":       user.TelegramName,
 		"WhatsApp":     user.WhatsApp,
-		"QrPath":       user.QrPath,
-		"ImagePath":    user.ImagePath,
+		"ImageDir":     user.QrPath,
 	}
 
 	if userSettings.Theme == "brown" {
@@ -207,4 +207,61 @@ func RenderUserProfile(c *fiber.Ctx) error {
 	}
 
 	return c.Redirect("/1")
+}
+
+func UploadImage(c *fiber.Ctx) error {
+
+	var data map[string]string
+	var userPath string
+
+	err := c.BodyParser(&data)
+	if err != nil {
+		return c.Status(400).JSON(
+			fiber.Map{
+				"success": false,
+				"message": "Invalid data",
+			})
+	}
+
+	if data["user_id"] == "" {
+		return c.Status(400).JSON(
+			fiber.Map{
+				"success": false,
+				"message": "Invalid data. User id is required.",
+			})
+	} else {
+		userPath = "./usersData/" + data["user_id"]
+	}
+	if data["image"] == "" {
+		return c.Status(400).JSON(
+			fiber.Map{
+				"success": false,
+				"message": "Invalid data. Image required.",
+			})
+	}
+
+	// Save b64 from data and making image
+	decoded, err := base64.StdEncoding.DecodeString(data["image"])
+	if err != nil {
+		panic(err)
+	}
+
+	// Write the image to a file
+	//Check if file exists is not necessary, if file exists it will be overwritten!!!
+	file, err := os.Create(userPath + "/image.png")
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	_, err = file.Write(decoded)
+	if err != nil {
+		panic(err)
+	}
+
+	return c.Status(404).JSON(fiber.Map{
+		"success": true,
+		"message": "Image upload successfully!",
+		"error":   map[string]interface{}{},
+	})
 }
