@@ -8,6 +8,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/log"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -49,8 +50,8 @@ func CreateUser(c *fiber.Ctx) error {
 		WebSite:      data["website"],
 		TelegramName: data["tg_name"],
 		WhatsApp:     data["whatsApp"],
-		CreatedAt:    time.Now(),
-		LastUpdate:   time.Now(),
+		CreatedAt:    time.Now().String(),
+		LastUpdate:   time.Now().String(),
 	}
 
 	db.DB.Create(&user)
@@ -89,7 +90,7 @@ func EditUser(c *fiber.Ctx) error {
 	}
 
 	user.Name = updateUser.Name
-	user.LastUpdate = time.Now()
+	user.LastUpdate = time.Now().String()
 	db.DB.Save(&updateUser)
 
 	return c.Status(200).JSON(fiber.Map{
@@ -146,15 +147,62 @@ func GetDetails(c *fiber.Ctx) error {
 	})
 }
 
+func InsertTheme(c *fiber.Ctx) error {
+
+	var data map[string]string
+
+	err := c.BodyParser(&data)
+	if err != nil {
+		return c.Status(400).JSON(
+			fiber.Map{
+				"success": false,
+				"message": "Invalid data",
+			})
+	}
+
+	if data["user_id"] == "" {
+		return c.Status(400).JSON(
+			fiber.Map{
+				"success": false,
+				"message": "Invalid data. User ID is required.",
+			})
+	}
+	if data["theme"] == "" {
+		return c.Status(400).JSON(
+			fiber.Map{
+				"success": false,
+				"message": "Invalid data. User Theme is required.",
+			})
+	}
+
+	user_id, err := strconv.ParseInt(data["user_id"], 10, 64)
+	if err != nil {
+		log.Info(err)
+	}
+
+	theme := models.UserSettings{
+		UserID: user_id,
+		Theme:  data["theme"],
+	}
+
+	db.DB.Create(&theme)
+
+	return c.Status(200).JSON(fiber.Map{
+		"success": true,
+		"message": "Theme Details",
+		"data":    theme,
+	})
+}
+
 func RenderUserProfile(c *fiber.Ctx) error {
 	userId := c.Params("userid")
 	var user models.User
 	var userSettings models.UserSettings
 	var path string
 
-	db.DB.Select("id, name, telegram_name, organization, phone_number, email, web_site, whats_app, description, qr_path, image_path").Where("id = ?", userId).First(&user)
-	db.DB.Select("theme").Where("user_id = ?", userId).First(&userSettings)
-
+	db.DB.Select("id, name, telegram_name, organization, phone_number, email, web_site, whats_app, description, qr_path").Where("id = ?", userId).First(&user)
+	db.DB.Select("theme").Where("user_id = ?", user.Id).First(&userSettings)
+	log.Info(user.Id)
 	if user.Id == 0 {
 		err := c.Redirect("/1")
 		if err != nil {
@@ -170,16 +218,21 @@ func RenderUserProfile(c *fiber.Ctx) error {
 	path = "usersData/" + userId
 	if !utils.PathExists(path) {
 		err := os.Mkdir(path, 0755)
-		utils.QrGenerate(userSettings.Theme, "http://localhost/"+userId, path)
+		utils.QrGenerate(userSettings.Theme, "http://localhost/"+strconv.FormatUint(uint64(user.Id), 10), path)
 		if err != nil {
 			log.Info(err)
 		}
 
 		user.QrPath = strings.Split(path, "/")[1]
-		log.Info()
+		db.DB.Save(&user)
+	} else {
+		os.Remove(path + "/qr.png")
+		utils.QrGenerate(userSettings.Theme, "http://localhost/"+strconv.FormatUint(uint64(user.Id), 10), path)
+
+		user.QrPath = strings.Split(path, "/")[1]
 		db.DB.Save(&user)
 	}
-
+	log.Info(user.QrPath)
 	userDataMap := fiber.Map{
 		"Title":        user.Name,
 		"Name":         user.Name,
@@ -191,6 +244,10 @@ func RenderUserProfile(c *fiber.Ctx) error {
 		"TgName":       user.TelegramName,
 		"WhatsApp":     user.WhatsApp,
 		"ImageDir":     user.QrPath,
+	}
+
+	if utils.PathExists(path + "/image.png") {
+		userDataMap["ImageDir1"] = user.QrPath + "/image.png"
 	}
 
 	if userSettings.Theme == "brown" {
@@ -206,7 +263,7 @@ func RenderUserProfile(c *fiber.Ctx) error {
 		return c.Render("pinkView/index", userDataMap)
 	}
 
-	return c.Redirect("/1")
+	return nil
 }
 
 func UploadImage(c *fiber.Ctx) error {
@@ -243,20 +300,20 @@ func UploadImage(c *fiber.Ctx) error {
 	// Save b64 from data and making image
 	decoded, err := base64.StdEncoding.DecodeString(data["image"])
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	// Write the image to a file
 	//Check if file exists is not necessary, if file exists it will be overwritten!!!
 	file, err := os.Create(userPath + "/image.png")
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	defer file.Close()
 
 	_, err = file.Write(decoded)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	return c.Status(404).JSON(fiber.Map{

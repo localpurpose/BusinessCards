@@ -29,6 +29,7 @@ func SetupDefaultRoutes(app *fiber.App) {
 
 	//Upload Image Handler.
 	app.Post("/api/uploadimage", controller.UploadImage)
+	app.Post("/api/inserttheme", controller.InsertTheme)
 
 	//------------------------------------------------
 	// Main Application

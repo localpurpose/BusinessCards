@@ -1,16 +1,16 @@
 package utils
 
 import (
-	"fmt"
+	"github.com/gofiber/fiber/v2/log"
 	qrcode "github.com/skip2/go-qrcode"
 	"image/color"
 )
 
 var colors = map[string]color.Color{
-	"pink":   color.CMYK{C: 1, M: 167, Y: 111, K: 83},
-	"blue":   color.CMYK{C: 182, M: 79, K: 178},
-	"brown":  color.CMYK{M: 63, Y: 111, K: 170},
-	"orange": color.CMYK{M: 137, Y: 220, K: 12},
+	"pink":   color.CMYK{1, 167, 111, 83},
+	"blue":   color.CMYK{182, 79, 0, 178},
+	"brown":  color.CMYK{0, 63, 111, 170},
+	"orange": color.CMYK{0, 137, 220, 12},
 }
 
 func GetColor(userColor string) color.Color {
@@ -33,6 +33,6 @@ func QrGenerate(userColor, url string, path string) {
 	)
 
 	if err != nil {
-		fmt.Println("error", err)
+		log.Info(err)
 	}
 }

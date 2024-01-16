@@ -17,7 +17,9 @@
         <div class="main">
             <div class="container">
                 <div class="img__container">
+                    {{ if .ImageDir1 }}
                     <img src="assets/qrs/{{.ImageDir}}/image.png" alt="photo">
+                    {{ end }}
                 </div>
 
                 <div class="title__container">
