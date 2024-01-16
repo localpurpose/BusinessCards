@@ -6,6 +6,9 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html/v2"
 	"log"
+
+	"crypto/tls"
+	"golang.org/x/crypto/acme/autocert"
 )
 
 func main() {
@@ -21,5 +24,29 @@ func main() {
 	app.Static("assets/qrs/", "./usersData")
 
 	routes.SetupDefaultRoutes(app)
-	log.Fatal(app.Listen(":80"))
+
+	m := &autocert.Manager{
+		Prompt:     autocert.AcceptTOS,
+		HostPolicy: autocert.HostWhitelist("visitkabot.ru"),
+		Cache:      autocert.DirCache("./certs"),
+	}
+
+	cfg := &tls.Config{
+		// Get Certificate from Let's Encrypt
+		GetCertificate: m.GetCertificate,
+		// By default NextProtos contains the "h2"
+		// This has to be removed since Fasthttp does not support HTTP/2
+		// Or it will cause a flood of PRI method logs
+		// http://webconcepts.info/concepts/http-method/PRI
+		NextProtos: []string{
+			"http/1.1", "acme-tls/1",
+		},
+	}
+
+	ln, err := tls.Listen("tcp", ":443", cfg)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Fatal(app.Listener(ln))
 }
