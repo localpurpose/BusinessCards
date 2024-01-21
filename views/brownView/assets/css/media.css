@@ -2,20 +2,44 @@
     .main .container{
         width: 100%;
     }
+    .main .container .qr__container{
+        margin-top: 10px;
+    }
+    .main .container .designed__container{
+        margin: 20px 0px 10px 0px;
+    }
 }
 @media only screen and (min-width: 375px) and (max-width: 430px){
     .main .container{
         width: 100%;
+    }
+    .main .container .qr__container{
+        margin-top: 10px;
+    }
+    .main .container .designed__container{
+        margin: 20px 0px 10px 0px;
     }
 }
 @media only screen and (min-width: 431px) and (max-width: 768px){
     .main .container{
         width: 50%;
     }
+    .main .container .qr__container{
+        margin-top: 10px;
+    }
+    .main .container .designed__container{
+        margin: 20px 0px 10px 0px;
+    }
 }
 @media only screen and (min-width: 769px) and (max-width: 1024px){
     .main .container{
         width: 40%;
+    }
+    .main .container .qr__container{
+        margin-top: 10px;
+    }
+    .main .container .designed__container{
+        margin: 20px 0px 10px 0px;
     }
 }
 @media only screen and (min-width: 1025px) and (max-width: 1440px){
@@ -26,6 +50,9 @@
 @media only screen and (min-width: 1441px) and (max-width: 1920px){
     .main .container .add__btn{
       display: none;
+    }
+    .main .container .designed__container{
+        display: none;
     }
 }
 @media only screen and (min-width: 1921px) and (max-width: 7700px){

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
 body {
     background-color:#EEE2DC;
     margin: 0;
@@ -10,22 +11,53 @@ body {
     align-items: center;
     justify-content: center;
 }
+.main .ad__container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    background-color: #AC3B61;
+    margin: 0;
+    padding: 1px;
+    max-height: 30px;
+}
+.main .ad__container p{
+    font-size: 15px;
+    color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+    padding-bottom: 2px;
+}
+.main .ad__container p a{
+    color: #FFFFFF;
+    text-decoration: none;
+    border-bottom: 1px solid #FFFFFF;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+.main .ad__container p a:hover{
+    border-bottom: 1px solid #123C69;
+    color: #123C69;
+}
 .main .container{
     width: 30%;
 }
 .main .container .img__container{
     text-align: center;
+    padding-top: 30px;
 }
 .main .container .img__container img{
     max-width: 100%;
-    max-height: 325px;
+    max-height: 300px;
     height: auto;
 }
 .main .container .title__container{
     width: fit-content;
     text-align: center;
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 0px;
     width: 95%;
 }
 .main .container .title__container h1{
@@ -42,6 +74,7 @@ body {
 }
 .main .container .title__container .title__divider{
     height: 2px;
+    margin: 6px;
 }
 .divider {
     width: 100%;
@@ -56,7 +89,7 @@ body {
     text-decoration: none;
     width: 90%;
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 25px;
 }
 .main .container .links__container .column{
     display: flex;
@@ -123,6 +156,23 @@ body {
     color: #AC3B61;
     text-decoration: none;
     font-size: 20px;
+}
+.main .container .designed__container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+}
+.main .container .designed__container p {
+    margin: 0;
+    font-size: 15px;
+    color: #123C69;
+}
+.main .container .designed__container p a {
+    text-decoration: none;
+    color: #AC3B61;
 }
 /* Анимация "divider" */
 .hr-animation {
