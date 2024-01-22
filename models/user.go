@@ -11,6 +11,7 @@ type User struct {
 	TelegramName string `json:"telegram_name"`
 	WhatsApp     string `json:"whatsApp"`
 	QrPath       string `json:"qrPath"`
+	Theme        string `json:"theme"`
 	CreatedAt    string `json:"created_at"`
 	LastUpdate   string `json:"last_update"`
 }
