@@ -50,6 +50,7 @@ func CreateUser(c *fiber.Ctx) error {
 		WebSite:      data["website"],
 		TelegramName: data["tg_name"],
 		WhatsApp:     data["whatsApp"],
+		Theme:        data["theme"],
 		CreatedAt:    time.Now().String(),
 		LastUpdate:   time.Now().String(),
 	}
@@ -180,9 +181,9 @@ func InsertTheme(c *fiber.Ctx) error {
 		log.Info(err)
 	}
 
-	theme := models.UserSettings{
-		UserID: user_id,
-		Theme:  data["theme"],
+	theme := models.User{
+		Id:    uint(user_id),
+		Theme: data["theme"],
 	}
 
 	db.DB.Create(&theme)
@@ -197,11 +198,9 @@ func InsertTheme(c *fiber.Ctx) error {
 func RenderUserProfile(c *fiber.Ctx) error {
 	userId := c.Params("userid")
 	var user models.User
-	var userSettings models.UserSettings
 	var path string
 
-	db.DB.Select("id, name, telegram_name, organization, phone_number, email, web_site, whats_app, description, qr_path").Where("id = ?", userId).First(&user)
-	db.DB.Select("theme").Where("user_id = ?", user.Id).First(&userSettings)
+	db.DB.Select("id, name, telegram_name, organization, phone_number, email, web_site, whats_app, description, qr_path, theme").Where("id = ?", userId).First(&user)
 	log.Info(user.Id)
 	if user.Id == 0 {
 		err := c.Redirect("/1")
@@ -218,7 +217,7 @@ func RenderUserProfile(c *fiber.Ctx) error {
 	path = "usersData/" + userId
 	if !utils.PathExists(path) {
 		err := os.Mkdir(path, 0755)
-		utils.QrGenerate(userSettings.Theme, "http://localhost/"+strconv.FormatUint(uint64(user.Id), 10), path)
+		utils.QrGenerate(user.Theme, "http://localhost/"+strconv.FormatUint(uint64(user.Id), 10), path)
 		if err != nil {
 			log.Info(err)
 		}
@@ -227,7 +226,7 @@ func RenderUserProfile(c *fiber.Ctx) error {
 		db.DB.Save(&user)
 	} else {
 		os.Remove(path + "/qr.png")
-		utils.QrGenerate(userSettings.Theme, "http://localhost/"+strconv.FormatUint(uint64(user.Id), 10), path)
+		utils.QrGenerate(user.Theme, "http://localhost/"+strconv.FormatUint(uint64(user.Id), 10), path)
 
 		user.QrPath = strings.Split(path, "/")[1]
 		db.DB.Save(&user)
@@ -250,16 +249,16 @@ func RenderUserProfile(c *fiber.Ctx) error {
 		userDataMap["ImageDir1"] = user.QrPath + "/image.png"
 	}
 
-	if userSettings.Theme == "brown" {
+	if user.Theme == "brown" {
 		return c.Render("brownView/index", userDataMap)
 	}
-	if userSettings.Theme == "blue" {
+	if user.Theme == "blue" {
 		return c.Render("blueView/index", userDataMap)
 	}
-	if userSettings.Theme == "orange" {
+	if user.Theme == "orange" {
 		return c.Render("orangeView/index", userDataMap)
 	}
-	if userSettings.Theme == "pink" {
+	if user.Theme == "pink" {
 		return c.Render("pinkView/index", userDataMap)
 	}
 
