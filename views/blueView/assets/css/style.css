@@ -10,8 +10,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
-.main .ad__container{
+.main .top__container{
     position: fixed;
     top: 0;
     left: 0;
@@ -25,19 +26,19 @@ body {
     padding: 1px;
     max-height: 30px;
 }
-.main .ad__container p{
+.main .top__container p{
     font-size: 15px;
     color: #E4E5EA;
     font-family: 'Montserrat', sans-serif;
     padding-bottom: 2px;
 }
-.main .ad__container p a{
+.main .top__container p a{
     color: #E4E5EA;
     text-decoration: none;
     border-bottom: 1px solid #E4E5EA;
     transition: color 0.3s ease, border-bottom 0.3s ease;
 }
-.main .ad__container p a:hover{
+.main .top__container p a:hover{
     border-bottom: 1px solid #6B99C3;
     color: #6B99C3;
 }
