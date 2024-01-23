@@ -1,2 +1,9 @@
-Жарим лук, делаем бизнес, слуашаем БТС!
-![watafak](https://github.com/localpurpose/BusinessCards/assets/139833240/23300323-b9d1-44d9-a3c7-435a79c7cd29)
+# BuisnessCards | ЯНЖЕ Product
+<img src="https://img.shields.io/badge/LICENSE-MIT-red"> <img alt="Static Badge" src="https://img.shields.io/badge/go%20report-A%2B%2B-brightgreen"> <img alt="Static Badge" src="https://img.shields.io/badge/release-v1.0-blue">
+<img alt="Static Badge" src="https://img.shields.io/badge/FRONT-amasaetre-white"> <img alt="Static Badge" src="https://img.shields.io/badge/BACK-localpurpose-black">
+
+## Quick Start
+Просто начните и все нормально потом будет
+Удачи!
+
+
