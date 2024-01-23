@@ -5,6 +5,10 @@
     .main .container .qr__container{
         margin-top: 10px;
     }
+    /* Это для отступов, когда фотографии нема */
+    .main .container .title__container{
+        margin-top: 50px;
+    }
     .main .container .designed__container{
         margin: 20px 0px 10px 0px;
     }
@@ -16,6 +20,10 @@
     .main .container .qr__container{
         margin-top: 10px;
     }
+    /* Это для отступов, когда фотографии нема */
+    .main .container .title__container{
+        margin-top: 50px;
+    }
     .main .container .designed__container{
         margin: 20px 0px 10px 0px;
     }
@@ -26,6 +34,10 @@
     }
     .main .container .qr__container{
         margin-top: 10px;
+    }
+    /* Это для отступов, когда фотографии нема */
+    .main .container .title__container{
+        margin-top: 50px;
     }
     .main .container .designed__container{
         margin: 20px 0px 10px 0px;
