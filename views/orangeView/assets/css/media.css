@@ -1,3 +1,18 @@
+@media only screen and (min-width: 200px) and (max-width: 373px){
+    .main .container{
+        width: 100%;
+    }
+    .main .container .qr__container{
+        margin-top: 10px;
+    }
+    /* Это для отступов, когда фотографии нема */
+    .main .container .title__container{
+        margin-top: 50px;
+    }
+    .main .container .designed__container{
+        margin: 20px 0px 10px 0px;
+    }
+}
 @media only screen and (min-width: 319px) and (max-width: 374px){
     .main .container{
         width: 100%;
@@ -30,7 +45,7 @@
 }
 @media only screen and (min-width: 431px) and (max-width: 768px){
     .main .container{
-        width: 50%;
+        width: 70%;
     }
     .main .container .qr__container{
         margin-top: 10px;
@@ -45,7 +60,7 @@
 }
 @media only screen and (min-width: 769px) and (max-width: 1024px){
     .main .container{
-        width: 40%;
+        width: 55%;
     }
     .main .container .qr__container{
         margin-top: 10px;
