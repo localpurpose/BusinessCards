@@ -51,8 +51,8 @@
                             <span class="typing-animation contact org__span">{{.Org}}</span>
                         </p>
                     </div>
-
-                    <hr class="divider top_divider">
+					<hr class="divider">
+                    {{if .PhoneNumber}}
 
                     <div class="column">
                         <label for="tel">Телефон</label>
@@ -62,8 +62,12 @@
                         </a>
                     </div>
 
-                    <hr class="divider">
+                    <hr class="divider top__divider">
 
+                    {{ else }}
+                    
+					{{ end }}
+					
                     <div class="column">
                         <label for="email">Почта</label>
                         <a href="mailto:{{.EmailAddress}}" class="email text" id="email">
@@ -74,6 +78,8 @@
 
                     <hr class="divider">
 
+					{{ if .WebSite }}
+
                     <div class="column">
                         <label for="website">Вебсайт</label>
                         <a href="https://{{.WebSite}}" class="website text" target="_blank" id="website">
@@ -81,9 +87,12 @@
                             <span class="typing-animation contact">{{.WebSite}}</span>
                         </a>
                     </div>
-
+					
                     <hr class="divider">
 
+					{{ else }}
+
+					{{ end  }}
                     <div class="column">
                         <label for="tg">Telegram</label>
                         <a href="https://t.me/{{.TgName}}" class="telegram text" target="_blank" id="tg">
@@ -94,15 +103,21 @@
 
                     <hr class="divider">
 
+					{{ if .WhatsApp }}
+					
                     <div class="column">
                         <label for="whatsapp">WhatsApp</label>
                         <a href="https://wa.me/{{.WhatsApp}}" class="whatsapp text" target="_blank" id="whatsapp">
-                            <i class="fa-brands fa-square-whatsapp fa-xl" style="color: #ac3b61;"></i>
+                            <i class="fa-brands fa-square-whatsapp fa-xl" style="color: #AC3B61;"></i>
                             <span class="typing-animation contact">{{.WhatsApp}}</span>
                         </a>
                     </div>
-
+					
                     <hr class="divider">
+
+                    {{ else }}
+
+                    {{ end }}
                 </div>
 
                 <div class="qr__container">
