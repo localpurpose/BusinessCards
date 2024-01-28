@@ -57,6 +57,14 @@ func CreateUser(c *fiber.Ctx) error {
 
 	db.DB.Create(&user)
 
+	path := "usersData/" + data["id"]
+	if !utils.PathExists(path) {
+		err := os.Mkdir(path, 0755)
+		if err != nil {
+			log.Info(err)
+		}
+	}
+
 	return c.Status(200).JSON(fiber.Map{
 		"success": true,
 		"message": "User created!",
@@ -217,7 +225,7 @@ func RenderUserProfile(c *fiber.Ctx) error {
 	path = "usersData/" + userId
 	if !utils.PathExists(path) {
 		err := os.Mkdir(path, 0755)
-		utils.QrGenerate(user.Theme, "http://localhost/"+strconv.FormatUint(uint64(user.Id), 10), path)
+		utils.QrGenerate(user.Theme, "https://visitkabot.ru/"+strconv.FormatUint(uint64(user.Id), 10), path)
 		if err != nil {
 			log.Info(err)
 		}
@@ -226,7 +234,7 @@ func RenderUserProfile(c *fiber.Ctx) error {
 		db.DB.Save(&user)
 	} else {
 		os.Remove(path + "/qr.png")
-		utils.QrGenerate(user.Theme, "http://localhost/"+strconv.FormatUint(uint64(user.Id), 10), path)
+		utils.QrGenerate(user.Theme, "https://visitkabot.ru/"+strconv.FormatUint(uint64(user.Id), 10), path)
 
 		user.QrPath = strings.Split(path, "/")[1]
 		db.DB.Save(&user)
@@ -287,6 +295,9 @@ func UploadImage(c *fiber.Ctx) error {
 			})
 	} else {
 		userPath = "./usersData/" + data["user_id"]
+		if !utils.PathExists(userPath) {
+			os.Mkdir(userPath, 0755)
+		}
 	}
 	if data["image"] == "" {
 		return c.Status(400).JSON(
