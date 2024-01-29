@@ -56,8 +56,8 @@ func CreateUser(c *fiber.Ctx) error {
 	}
 
 	db.DB.Create(&user)
-	strconv.Itoa(int(user.Id))
-	path := "usersData/" + data["id"]
+
+	path := "usersData/" + strconv.Itoa(int(user.Id))
 	if !utils.PathExists(path) {
 		err := os.Mkdir(path, 0755)
 		if err != nil {
@@ -330,11 +330,5 @@ func UploadImage(c *fiber.Ctx) error {
 		"success": true,
 		"message": "Image upload successfully!",
 		"error":   map[string]interface{}{},
-	})
-}
-
-func RenderRegister(c *fiber.Ctx) error {
-	return c.Render("registration/index", fiber.Map{
-		"Title": "Регистрация",
 	})
 }
