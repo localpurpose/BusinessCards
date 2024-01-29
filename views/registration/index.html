@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title>
+    <style>
+        label {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <form action="#" method="POST">
+        <label for="name">Имя</label>
+        <input type="text" placeholder="Name" name="name" id="name">
+        <br><br>
+        <label for="descr">Описание</label>
+        <input type="text" placeholder="Description" name="descr" id="descr">
+        <br><br>
+        <label for="org">Организация</label>
+        <input type="text" placeholder="Organization" name="org" id="org">
+        <br><br>
+        <label for="email">Электронная почта</label>
+        <input type="email" placeholder="Email" name="email" id="email">
+        <br><br>
+        <label for="website">Веб-сайт</label>
+        <input type="text" placeholder="Website" name="website" id="website">
+        <br><br>
+        <label for="phone">Телефон</label>
+        <input type="tel" placeholder="Phone" name="phone" id="phone">
+        <br><br>
+        <label for="tg">Telegram</label>
+        <input type="text" placeholder="telegram" name="tg" id="tg">
+        <br><br>
+        <label for="wa">WhatsApp</label>
+        <input type="text" placeholder="whatsapp" name="wa" id="wa">
+        <br><br>
+        <label for="photo">Фотография</label>
+        <input type="file" name="photo" id="photo">
+        <br><br>
+        <label for="temp">Шаблоны</label>
+        <select name="temp" id="temp">
+            <option value="pink">Pink</option>
+            <option value="brown">Brown</option>
+            <option value="blue">Blue</option>
+            <option value="orange">Orange</option>
+        </select>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+</main>
+</body>
+</html>
