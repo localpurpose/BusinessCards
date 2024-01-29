@@ -38,4 +38,9 @@ func SetupDefaultRoutes(app *fiber.App) {
 	})
 
 	app.Get("/:userid", controller.RenderUserProfile)
+
+	//------------------------------------------------
+	// Registration
+	//------------------------------------------------
+	app.Get("/createcard", controller.RenderRegister)
 }
