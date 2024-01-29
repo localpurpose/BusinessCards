@@ -57,7 +57,7 @@ func CreateUser(c *fiber.Ctx) error {
 
 	db.DB.Create(&user)
 
-	path := "usersData/" + data["id"]
+	path := "usersData/" + strconv.Itoa(int(user.Id))
 	if !utils.PathExists(path) {
 		err := os.Mkdir(path, 0755)
 		if err != nil {
