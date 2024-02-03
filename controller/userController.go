@@ -318,7 +318,7 @@ func UploadImage(c *fiber.Ctx) error {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	//
 	// Write the image to a file
 	//Check if file exists is not necessary, if file exists it will be overwritten!!!
 	file, err := os.Create(userPath + "/image.png")
