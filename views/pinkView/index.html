@@ -4,93 +4,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Card</title>
+    <title>{{.Name}}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/media.css">
+        <link rel="stylesheet" href="assets/pinkView/css/style.css">
+        <link rel="stylesheet" href="assets/pinkView/css/media.css">
 </head>
 
 <body>
     <main>
         <div class="main">
+            <div class="top__container">
+                <p>Нет визитки? <a href="https://t.me/BusinCard_Bot" target="_blank"> Создайте её!</a></p>
+            </div>
             <div class="container">
                 <div class="img__container">
-                    <img src="assets/img/f27d4d2140208a35437c1be7164375d0.jpg" alt="photo">
+                    {{ if .ImageDir1 }}
+                    <img src="assets/qrs/{{.ImageDir}}/image.png" alt="photo">
+                    {{ end }}
                 </div>
 
-                <div class="title__container">
-                    <h1 class="name contact">Екатерина Иванова</h1>
-                    <hr class="divider title__divider  hr-animation">
-                    <p class="subtitle">
-                        Руководитель Отдела "Kasperky Premium"<br>
-                        Безопасность – это процесс, а не результат.
-                    </p>
-
-                </div>
-
+               {{ if .ImageDir1 }}
+               <div class="title__container">
+               	<h1 class="name contact">{{.Name}}</h1>
+               	<hr class="divider title__divider  hr-animation">
+               	<p class="subtitle">
+               		{{.Desk}}
+               	</p>
+               </div>
+               {{ else }}
+               <div class="title__container" style="margin-top: 20px;">
+               <h1 class="name contact">{{.Name}}</h1>
+               	<hr class="divider title__divider  hr-animation">
+               	<p class="subtitle">
+               		{{.Desk}}
+               	</p>
+               </div>
+               {{ end }}
 
                 <div class="links__container">
-                    <label for="">Организация, должность</label>
-                    <p class="org text">
-                        <i class="fa-solid fa-building fa-lg" style="color: #AC3B61;"></i>
-                        <span class="typing-animation contact">OOO Касперский, РО "Kasperky Premium" </span>
-                    </p>
-                    <hr class="divider top_divider">
+                    <div class="column">
+                        <label for="org">Организация, должность</label>
+                        <p class="org text" id="org">
+                            <i class="fa-solid fa-building fa-lg" style="color: #AC3B61;"></i>
+                            <span class="typing-animation contact org__span">{{.Org}}</span>
+                        </p>
+                    </div>
+					<hr class="divider">
+                    {{if .PhoneNumber}}
 
-                    <label for="#">Телефон</label>
-                    <a href="tel:+79999999999" class="phone text">
-                        <i class="fa-solid fa-phone fa-lg" style="color: #AC3B61;"></i>
-                        <span class="typing-animation contact">+7 (888) 888-88-88</span>
-                    </a>
+                    <div class="column">
+                        <label for="tel">Телефон</label>
+                        <a href="tel:{{.PhoneNumber}}" class="phone text" id="tel">
+                            <i class="fa-solid fa-phone fa-lg" style="color: #AC3B61;"></i>
+                            <span class="typing-animation contact">{{.PhoneNumber}}</span>
+                        </a>
+                    </div>
 
-                    <hr class="divider">
+                    <hr class="divider top__divider">
 
-                    <label for="#">Почта</label>
-                    <a href="mailto:vladimir@gmail.com" class="email text">
-                        <i class="fa-solid fa-envelope fa-lg" style="color: #AC3B61;"></i>
-                        <span class="typing-animation contact">ivanova@yandex.ru</span>
-                    </a>
-
-                    <hr class="divider">
-
-                    <label for="#">Вебсайт</label>
-                    <a href="https://vladimir.com" class="website text" target="_blank">
-                        <i class="fa-solid fa-earth-americas fa-lg" style="color: #AC3B61;"></i>
-                        <span class="typing-animation contact">https://ivanova.ru</span>
-                    </a>
-
-                    <hr class="divider">
-
-                    <label for="#">Telegram</label>
-                    <a href="https://t.me/amasaetre" class="telegram text" target="_blank">
-                        <i class="fa-solid fa-paper-plane fa-lg" style="color: #AC3B61;"></i>
-                        <span class="typing-animation contact">@ivanova</span>
-                    </a>
+                    {{ else }}
+                    
+					{{ end }}
+					
+                    <div class="column">
+                        <label for="email">Почта</label>
+                        <a href="mailto:{{.EmailAddress}}" class="email text" id="email">
+                            <i class="fa-solid fa-envelope fa-lg" style="color: #AC3B61;"></i>
+                            <span class="typing-animation contact">{{.EmailAddress}}</span>
+                        </a>
+                    </div>
 
                     <hr class="divider">
 
-                    <label for="#">WhatsApp</label>
-                    <a href="https://wa.me/79999999999" class="whatsapp text" target="_blank">
-                        <i class="fa-brands fa-square-whatsapp fa-xl" style="color: #ac3b61;"></i>
-                        <span class="typing-animation contact">+7 (888) 888-88-88</span>
-                    </a>
+					{{ if .WebSite }}
+
+                    <div class="column">
+                        <label for="website">Вебсайт</label>
+                        <a href="https://{{.WebSite}}" class="website text" target="_blank" id="website">
+                            <i class="fa-solid fa-earth-americas fa-lg" style="color: #AC3B61;"></i>
+                            <span class="typing-animation contact">{{.WebSite}}</span>
+                        </a>
+                    </div>
+					
+                    <hr class="divider">
+
+					{{ else }}
+
+					{{ end  }}
+                    <div class="column">
+                        <label for="tg">Telegram</label>
+                        <a href="https://t.me/{{.TgName}}" class="telegram text" target="_blank" id="tg">
+                            <i class="fa-solid fa-paper-plane fa-lg" style="color: #AC3B61;"></i>
+                            <span class="typing-animation contact">@{{.TgName}}</span>
+                        </a>
+                    </div>
 
                     <hr class="divider">
+
+					{{ if .WhatsApp }}
+					
+                    <div class="column">
+                        <label for="whatsapp">WhatsApp</label>
+                        <a href="https://wa.me/{{.WhatsApp}}" class="whatsapp text" target="_blank" id="whatsapp">
+                            <i class="fa-brands fa-square-whatsapp fa-xl" style="color: #AC3B61;"></i>
+                            <span class="typing-animation contact">{{.WhatsApp}}</span>
+                        </a>
+                    </div>
+					
+                    <hr class="divider">
+
+                    {{ else }}
+
+                    {{ end }}
                 </div>
 
                 <div class="qr__container">
-                    <img src="assets/img/qr.png" alt="qr">
+                    <img src="assets/qrs/{{.ImageDir}}/qr.png" alt="qr">
                 </div>
 
                 <div class="add__btn" onclick="addToContacts()">
                     <span>Добавить в контакты</span>
                 </div>
+
+                <div class="designed__container">
+                    <p>Designed by <a href="https://t.me/amasaetreCo">Amasaetre & Co</a></p>
+                </div>
             </div>
         </div>
     </main>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/pinkView/js/script.js"></script>
 </body>
-
 </html>

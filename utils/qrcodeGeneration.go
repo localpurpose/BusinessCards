@@ -1,29 +1,38 @@
 package utils
 
 import (
-	"fmt"
+	"github.com/gofiber/fiber/v2/log"
 	qrcode "github.com/skip2/go-qrcode"
 	"image/color"
 )
 
-//const (
-//	pink = 1, 167, 111, 83]
-//)
+var colors = map[string]color.Color{
+	"pink":   color.CMYK{1, 167, 111, 83},
+	"blue":   color.CMYK{182, 79, 0, 178},
+	"brown":  color.CMYK{0, 63, 111, 170},
+	"orange": color.CMYK{0, 137, 220, 12},
+}
 
-//pink = 1, 167, 111, 83
-//blue = 182, 79, 0, 178
-//brown = 0, 63, 111, 170
-//orange = 0, 137, 220, 12
+func GetColor(userColor string) color.Color {
+	c, ok := colors[userColor]
+	if !ok {
+		c = color.Transparent
+	}
+	return c
+}
 
-func qrGenerate(userColor string, url string) {
+func QrGenerate(userColor, url string, path string) {
+	c := GetColor(userColor)
+
 	err := qrcode.WriteColorFile(
-		"https://test.amasaetre.ru",
+		url,
 		qrcode.Medium, 128,
 		color.Transparent,
-		color.CMYK{0, 54, 86, 5},
-		"qr.png")
-	if err != nil {
-		fmt.Println("error", err)
-	}
+		c,
+		path+"/qr.png",
+	)
 
+	if err != nil {
+		log.Info(err)
+	}
 }
