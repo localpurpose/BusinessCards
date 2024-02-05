@@ -14,6 +14,12 @@ type (
 func SetupDefaultRoutes(app *fiber.App) {
 
 	//------------------------------------------------
+	// Registration
+	//------------------------------------------------
+	app.Get("/createcard", controller.RenderRegister)
+	app.Post("/createcard", controller.DoRegister)
+
+	//------------------------------------------------
 	// API
 	//------------------------------------------------
 
@@ -29,12 +35,6 @@ func SetupDefaultRoutes(app *fiber.App) {
 
 	//Upload Image Handler.
 	app.Post("/api/uploadimage", controller.UploadImage)
-
-	//------------------------------------------------
-	// Registration
-	//------------------------------------------------
-	app.Get("/createcard", controller.RenderRegister)
-	app.Post("/createcard", controller.DoRegister)
 
 	//------------------------------------------------
 	// Main Application
