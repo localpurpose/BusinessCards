@@ -31,6 +31,12 @@ func SetupDefaultRoutes(app *fiber.App) {
 	app.Post("/api/uploadimage", controller.UploadImage)
 
 	//------------------------------------------------
+	// Registration
+	//------------------------------------------------
+	app.Get("/createcard", controller.RenderRegister)
+	app.Post("/createcard", controller.DoRegister)
+
+	//------------------------------------------------
 	// Main Application
 	//------------------------------------------------
 	app.Get("/", func(c *fiber.Ctx) error {
@@ -39,9 +45,4 @@ func SetupDefaultRoutes(app *fiber.App) {
 
 	app.Get("/:userid", controller.RenderUserProfile)
 
-	//------------------------------------------------
-	// Registration
-	//------------------------------------------------
-	app.Get("/createcard", controller.RenderRegister)
-	app.Post("/createcard", controller.DoRegister)
 }
