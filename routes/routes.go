@@ -43,4 +43,5 @@ func SetupDefaultRoutes(app *fiber.App) {
 	// Registration
 	//------------------------------------------------
 	app.Get("/createcard", controller.RenderRegister)
+	app.Post("/createcard", controller.DoRegister)
 }

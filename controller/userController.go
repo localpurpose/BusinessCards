@@ -156,53 +156,6 @@ func GetDetails(c *fiber.Ctx) error {
 	})
 }
 
-/*func InsertTheme(c *fiber.Ctx) error {
-
-	var data map[string]string
-
-	err := c.BodyParser(&data)
-	if err != nil {
-		return c.Status(400).JSON(
-			fiber.Map{
-				"success": false,
-				"message": "Invalid data",
-			})
-	}
-
-	if data["user_id"] == "" {
-		return c.Status(400).JSON(
-			fiber.Map{
-				"success": false,
-				"message": "Invalid data. User ID is required.",
-			})
-	}
-	if data["theme"] == "" {
-		return c.Status(400).JSON(
-			fiber.Map{
-				"success": false,
-				"message": "Invalid data. User Theme is required.",
-			})
-	}
-
-	user_id, err := strconv.ParseInt(data["user_id"], 10, 64)
-	if err != nil {
-		log.Info(err)
-	}
-
-	theme := models.User{
-		Id:    uint(user_id),
-		Theme: data["theme"],
-	}
-
-	db.DB.Create(&theme)
-
-	return c.Status(200).JSON(fiber.Map{
-		"success": true,
-		"message": "Theme Details",
-		"data":    theme,
-	})
-}*/
-
 func RenderUserProfile(c *fiber.Ctx) error {
 	userId := c.Params("userid")
 	var user models.User
@@ -338,4 +291,15 @@ func UploadImage(c *fiber.Ctx) error {
 		"message": "Image upload successfully!",
 		"error":   map[string]interface{}{},
 	})
+}
+
+func RenderRegister(c *fiber.Ctx) error {
+	return c.Render("registration/index", nil)
+}
+
+func DoRegister(c *fiber.Ctx) error {
+	name := c.FormValue("name")
+	log.Info(name)
+
+	return nil
 }
