@@ -25,11 +25,11 @@ func main() {
 	app.Static("assets/qrs/", "./usersData")
 
 	//Static Main Page files
-	app.Static("assets/main/", "./views/mainPage/assets/")
+	app.Static("assets/main/", "./views/mainPage/assets")
 	routes.SetupDefaultRoutes(app)
 
 	//Static Registration files
-	app.Static("assets/reg/", "./views/registration/assets/")
+	app.Static("assets/reg/", "./views/registration/assets")
 
 	m := &autocert.Manager{
 		Prompt:     autocert.AcceptTOS,
