@@ -37,15 +37,16 @@ func SetupDefaultRoutes(app *fiber.App) {
 	app.Post("/api/uploadimage", controller.UploadImage)
 
 	//------------------------------------------------
+	// Main Application
+	//------------------------------------------------
+	app.Get("/", controller.RenderMain)
+	app.Get("/:userid", controller.RenderUserProfile)
+
+	//------------------------------------------------
 	// 404 Middleware
 	//------------------------------------------------
 	app.Use(func(c *fiber.Ctx) error {
 		return c.SendStatus(404) // => 404 "Not Found"
 	})
 
-	//------------------------------------------------
-	// Main Application
-	//------------------------------------------------
-	app.Get("/", controller.RenderMain)
-	app.Get("/:userid", controller.RenderUserProfile)
 }
