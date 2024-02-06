@@ -28,6 +28,9 @@ func main() {
 	app.Static("assets/main/", "./views/mainPage/assets/")
 	routes.SetupDefaultRoutes(app)
 
+	//Static REgistration files
+	app.Static("assets/reg/", "./views/registration/assets")
+
 	m := &autocert.Manager{
 		Prompt:     autocert.AcceptTOS,
 		HostPolicy: autocert.HostWhitelist("visitkabot.ru"),
