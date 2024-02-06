@@ -40,7 +40,7 @@ func SetupDefaultRoutes(app *fiber.App) {
 	// Main Application
 	//------------------------------------------------
 	app.Get("/", controller.RenderMain)
-	app.Get("/:userid", controller.RenderUserProfile)
+	app.Get("/user/:userid", controller.RenderUserProfile)
 
 	//------------------------------------------------
 	// 404 Middleware

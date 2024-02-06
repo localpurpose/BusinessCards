@@ -179,7 +179,7 @@ func RenderUserProfile(c *fiber.Ctx) error {
 	path = "usersData/" + userId
 	if !utils.PathExists(path) {
 		err := os.Mkdir(path, 0600)
-		utils.QrGenerate(user.Theme, "https://visitkabot.ru/"+strconv.FormatUint(uint64(user.Id), 10), path)
+		utils.QrGenerate(user.Theme, "https://visitkabot.ru/user/"+strconv.FormatUint(uint64(user.Id), 10), path)
 		if err != nil {
 			log.Info(err)
 		}
@@ -191,7 +191,7 @@ func RenderUserProfile(c *fiber.Ctx) error {
 		if err != nil {
 			log.Info(err)
 		}
-		utils.QrGenerate(user.Theme, "https://visitkabot.ru/"+strconv.FormatUint(uint64(user.Id), 10), path)
+		utils.QrGenerate(user.Theme, "https://visitkabot.ru/user/"+strconv.FormatUint(uint64(user.Id), 10), path)
 
 		user.QrPath = strings.Split(path, "/")[1]
 		db.DB.Save(&user)
