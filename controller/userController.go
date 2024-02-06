@@ -299,7 +299,28 @@ func RenderRegister(c *fiber.Ctx) error {
 
 func DoRegister(c *fiber.Ctx) error {
 	name := c.FormValue("name")
-	log.Info(name)
+	desc := c.FormValue("descr")
+	org := c.FormValue("org")
+	email := c.FormValue("email")
+	website := c.FormValue("website")
+	phone := c.FormValue("phone")
+	tg := c.FormValue("tg")
+	wa := c.FormValue("wa")
+
+	photo, err := c.FormFile("photo")
+	if err != nil {
+		log.Info(err)
+		return c.Status(fiber.StatusBadRequest).SendString("Ошибка при получении файла из формы")
+	}
+
+	// Определяем путь сохранения файла на сервере
+	uploadPath := "./usersData/" + photo.Filename
+
+	// Сохраняем файл на сервере
+	if err := c.SaveFile(photo, uploadPath); err != nil {
+		log.Info(err)
+		return c.Status(fiber.StatusInternalServerError).SendString("Ошибка при сохранении файла")
+	}
 
 	return nil
 }
