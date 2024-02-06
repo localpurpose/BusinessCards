@@ -13,6 +13,9 @@ import (
 	"time"
 )
 
+/*
+Function cathes all POST requests and add new ser to the database
+*/
 func CreateUser(c *fiber.Ctx) error {
 
 	var data map[string]string
@@ -72,6 +75,10 @@ func CreateUser(c *fiber.Ctx) error {
 	})
 
 }
+
+/*
+Edit user profile function. POST request.
+*/
 func EditUser(c *fiber.Ctx) error {
 
 	userId := c.Params("userid")
@@ -109,6 +116,9 @@ func EditUser(c *fiber.Ctx) error {
 	})
 }
 
+/*
+Function that cathes all POST requests, userid and token requiered.
+*/
 func DeleteUser(c *fiber.Ctx) error {
 	userId := c.Params("userid")
 	var user models.User
@@ -128,6 +138,10 @@ func DeleteUser(c *fiber.Ctx) error {
 	})
 }
 
+/*
+Function that cathes all GET requests to /api/user/:userid.
+Return details about user from its userid.
+*/
 func GetDetails(c *fiber.Ctx) error {
 
 	userId := c.Params("userid")
@@ -157,23 +171,18 @@ func GetDetails(c *fiber.Ctx) error {
 	})
 }
 
+/*
+User`s profile rendering function.
+*/
 func RenderUserProfile(c *fiber.Ctx) error {
 	userId := c.Params("userid")
 	var user models.User
 	var path string
 
 	db.DB.Select("id, name, telegram_name, organization, phone_number, email, web_site, whats_app, description, qr_path, theme").Where("id = ?", userId).First(&user)
-	log.Info(user.Id)
+
 	if user.Id == 0 {
-		err := c.Redirect("/1")
-		if err != nil {
-			log.Info(err)
-		}
-		return c.Status(404).JSON(fiber.Map{
-			"success": false,
-			"message": "User not found",
-			"error":   map[string]interface{}{},
-		})
+		return c.Redirect("/")
 	}
 
 	path = "usersData/" + userId
@@ -230,6 +239,10 @@ func RenderUserProfile(c *fiber.Ctx) error {
 	return nil
 }
 
+/*
+Function that cathces requests to /api/uploadimage.
+Image b64 and userid requiered.
+*/
 func UploadImage(c *fiber.Ctx) error {
 
 	var data map[string]string
@@ -294,10 +307,17 @@ func UploadImage(c *fiber.Ctx) error {
 	})
 }
 
+/*
+Registration quest rendering function.
+*/
 func RenderRegister(c *fiber.Ctx) error {
 	return c.Render("registration/index", nil)
 }
 
+/*
+Function that cathces POST request to visitkabot.ru/createuser.
+User model required!
+*/
 func DoRegister(c *fiber.Ctx) error {
 
 	// Валидация проводится на фронтенде
@@ -337,6 +357,9 @@ func DoRegister(c *fiber.Ctx) error {
 	return c.Redirect("/" + strconv.Itoa(int(user.Id)))
 }
 
+/*
+Main page rendering function.
+*/
 func RenderMain(c *fiber.Ctx) error {
 	return c.Render("mainPage/index", nil)
 }
