@@ -26,10 +26,11 @@ func main() {
 
 	//Static Main Page files
 	app.Static("assets/main/", "./views/mainPage/assets")
-	routes.SetupDefaultRoutes(app)
 
 	//Static Registration files
 	app.Static("assets/reg/", "./views/registration/assets")
+
+	routes.SetupDefaultRoutes(app)
 
 	m := &autocert.Manager{
 		Prompt:     autocert.AcceptTOS,
