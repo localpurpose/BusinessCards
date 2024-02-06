@@ -25,7 +25,7 @@ func main() {
 	app.Static("assets/qrs/", "./usersData")
 
 	//Static Main Page files
-	app.Static("assets/main", "./views/mainpage/assets/")
+	app.Static("assets/main/", "./views/mainpage/assets/")
 	routes.SetupDefaultRoutes(app)
 
 	m := &autocert.Manager{
