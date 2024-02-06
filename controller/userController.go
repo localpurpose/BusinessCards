@@ -127,6 +127,7 @@ func DeleteUser(c *fiber.Ctx) error {
 		"message": "User deleted successfully!",
 	})
 }
+
 func GetDetails(c *fiber.Ctx) error {
 
 	userId := c.Params("userid")
@@ -298,24 +299,44 @@ func RenderRegister(c *fiber.Ctx) error {
 }
 
 func DoRegister(c *fiber.Ctx) error {
-	name := c.FormValue("name")
-	//desc := c.FormValue("descr")
-	//org := c.FormValue("org")
-	//email := c.FormValue("email")
-	//website := c.FormValue("website")
-	//phone := c.FormValue("phone")
-	//tg := c.FormValue("tg")
-	//wa := c.FormValue("wa")
 
+	// Валидация проводится на фронтенде
+
+	user := models.User{
+		Name:         c.FormValue("name"),
+		Description:  c.FormValue("descr"),
+		Organization: c.FormValue("org"),
+		PhoneNumber:  c.FormValue("phone"),
+		Email:        c.FormValue("email"),
+		WebSite:      c.FormValue("website"),
+		TelegramName: c.FormValue("tg"),
+		WhatsApp:     c.FormValue("wa"),
+		Theme:        c.FormValue("theme"),
+		CreatedAt:    time.Now().String(),
+		LastUpdate:   time.Now().String(),
+	}
+
+	db.DB.Create(&user)
+	//Создание директории пользователя
+	path := "usersData/" + strconv.Itoa(int(user.Id))
+	if !utils.PathExists(path) {
+		err := os.Mkdir(path, 0600)
+		if err != nil {
+			log.Info(err)
+		}
+	}
+	//Получаем фото из формы
 	photo, err := c.FormFile("photo")
 	if err != nil {
 		log.Info(err)
 	}
-	if err := c.SaveFile(photo, "./usersData/"+photo.Filename); err != nil {
+	//Сохранение фото пользователя в его директорию
+	if err := c.SaveFile(photo, path+"/image.png"); err != nil {
 		log.Info(err)
-	} else {
-		log.Info("file uploaded successfully || usersData/" + photo.Filename)
 	}
-	log.Info(name)
-	return c.Redirect("/createcard")
+	return c.Redirect("/" + strconv.Itoa(int(user.Id)))
+}
+
+func RenderMain(c *fiber.Ctx) error {
+	return c.Render("mainPage/index", nil)
 }

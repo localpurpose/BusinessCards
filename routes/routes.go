@@ -39,10 +39,13 @@ func SetupDefaultRoutes(app *fiber.App) {
 	//------------------------------------------------
 	// Main Application
 	//------------------------------------------------
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.Redirect("/1") // Redirect to the creator page
-	})
-
+	app.Get("/", controller.RenderMain)
 	app.Get("/:userid", controller.RenderUserProfile)
 
+	//------------------------------------------------
+	// 404 Middleware
+	//------------------------------------------------
+	app.Use(func(c *fiber.Ctx) error {
+		return c.SendStatus(404) // => 404 "Not Found"
+	})
 }
