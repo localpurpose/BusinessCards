@@ -310,16 +310,11 @@ func DoRegister(c *fiber.Ctx) error {
 	photo, err := c.FormFile("photo")
 	if err != nil {
 		log.Info(err)
-		return c.Status(fiber.StatusBadRequest).SendString("Ошибка при получении файла из формы")
 	}
-
-	// Определяем путь сохранения файла на сервере
-	uploadPath := "./usersData/" + photo.Filename
-
-	// Сохраняем файл на сервере
-	if err := c.SaveFile(photo, uploadPath); err != nil {
+	if err := c.SaveFile(photo, "./usersData/"+photo.Filename); err != nil {
 		log.Info(err)
-		return c.Status(fiber.StatusInternalServerError).SendString("Ошибка при сохранении файла")
+	} else {
+		log.Info("file uploaded successfully || usersData/" + photo.Filename)
 	}
 	log.Info(name)
 	return nil
