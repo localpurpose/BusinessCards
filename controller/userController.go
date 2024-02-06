@@ -354,6 +354,7 @@ func DoRegister(c *fiber.Ctx) error {
 	if err := c.SaveFile(photo, path+"/image.png"); err != nil {
 		log.Info(err)
 	}
+	log.Info(user.Name)
 	return c.Redirect("/" + strconv.Itoa(int(user.Id)))
 }
 
