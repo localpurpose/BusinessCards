@@ -317,5 +317,5 @@ func DoRegister(c *fiber.Ctx) error {
 		log.Info("file uploaded successfully || usersData/" + photo.Filename)
 	}
 	log.Info(name)
-	return nil
+	return c.Redirect("/createcard")
 }
