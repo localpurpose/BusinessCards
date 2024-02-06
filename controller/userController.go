@@ -298,14 +298,14 @@ func RenderRegister(c *fiber.Ctx) error {
 }
 
 func DoRegister(c *fiber.Ctx) error {
-	name := c.FormValue("name")
-	desc := c.FormValue("descr")
-	org := c.FormValue("org")
-	email := c.FormValue("email")
-	website := c.FormValue("website")
-	phone := c.FormValue("phone")
-	tg := c.FormValue("tg")
-	wa := c.FormValue("wa")
+	//name := c.FormValue("name")
+	//desc := c.FormValue("descr")
+	//org := c.FormValue("org")
+	//email := c.FormValue("email")
+	//website := c.FormValue("website")
+	//phone := c.FormValue("phone")
+	//tg := c.FormValue("tg")
+	//wa := c.FormValue("wa")
 
 	photo, err := c.FormFile("photo")
 	if err != nil {
