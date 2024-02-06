@@ -298,7 +298,7 @@ func RenderRegister(c *fiber.Ctx) error {
 }
 
 func DoRegister(c *fiber.Ctx) error {
-	//name := c.FormValue("name")
+	name := c.FormValue("name")
 	//desc := c.FormValue("descr")
 	//org := c.FormValue("org")
 	//email := c.FormValue("email")
@@ -321,6 +321,6 @@ func DoRegister(c *fiber.Ctx) error {
 		log.Info(err)
 		return c.Status(fiber.StatusInternalServerError).SendString("Ошибка при сохранении файла")
 	}
-
+	log.Info(name)
 	return nil
 }
