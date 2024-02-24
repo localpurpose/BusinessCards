@@ -18,6 +18,8 @@ func SetupDefaultRoutes(app *fiber.App) {
 	//------------------------------------------------
 	app.Get("/", controller.RenderMain)
 	app.Get("/user/:userid", controller.RenderUserProfile)
+	app.Get("/policy", controller.RenderPolicy)
+	app.Get("/rules", controller.RenderRules)
 
 	//------------------------------------------------
 	// Registration

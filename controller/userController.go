@@ -364,3 +364,15 @@ Main page rendering function.
 func RenderMain(c *fiber.Ctx) error {
 	return c.Render("home/index", nil)
 }
+
+/*
+ */
+func RenderPolicy(c *fiber.Ctx) error {
+	return c.Render("home/views/policy", nil)
+}
+
+/*
+ */
+func RenderRules(c *fiber.Ctx) error {
+	return c.Render("home/views/rules", nil)
+}
