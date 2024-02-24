@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisitkaBot</title>
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Создайте впечатляющие онлайн бизнес визитки всего за несколько простых шагов с нашим сервисом. Позвольте вашему бренду выделиться среди конкурентов..">
+    <meta name="keywords" content="онлайн визитка, создать онлайн визитку, бизнес визитка, визитка, создать визитку, веб-визитка, веб визитка, визитка бот, visitka bot, visitkabot">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/create.css">
+    <link rel="stylesheet" href="../assets/css/createMedia.css">
+</head>
+
+<body>
+    <div class="loader"></div>
+    <header>
+        <div class="return__container">
+            <a href="/" aria-label="quit">
+                <i class="fa-solid fa-right-from-bracket fa-flip-horizontal fa-2xl" style="color: #5c5cd6;"></i>
+            </a>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="main__container">
+                <div class="title__container">
+                    <h1 class="dynamic-margin">Создание визитки</h1>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="form__container">
+                    <form id="form" action="" method="POST" enctype="multipart/form-data" autocomplete="on">
+                        <div class="templates form-step">
+                            <div class="swiper-container create__slider" >
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide blue" data-color="blue">
+                                        <div class="block block__blue">
+                                            <div class="block__top">
+                                                <div class="block__img">
+                                                    <i class="fa-regular fa-image fa-2xl"></i>
+                                                </div>
+                                                <div class="title">
+                                                    <p>Ваше имя</p>
+                                                </div>
+                                                <div class="divider__top"></div>
+                                                <div class="descr">
+                                                    <p>Описание</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="block__form">
+                                                <div class="org link">
+                                                    <p><i class="fa-solid fa-building"></i><span>Организация</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="tel link">
+                                                    <p><i class="fa-solid fa-phone"></i><span>Телефон</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="mail link">
+                                                    <p><i class="fa-solid fa-envelope"></i><span>Почта</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="website link">
+                                                    <p><i class="fa-solid fa-earth-americas"></i><span>Вебсайт</span>
+                                                    </p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="tg link">
+                                                    <p><i class="fa-solid fa-paper-plane"></i><span>Telegram</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="wa link">
+                                                    <p><i class="fa-brands fa-square-whatsapp"></i><span>WhatsApp</span>
+                                                    </p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                            </div>
+                                            <div class="qr">
+                                                <i class="fa-solid fa-qrcode fa-2xl"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide pink" data-color="pink">
+                                        <div class="block block__pink">
+                                            <div class="block__top">
+                                                <div class="block__img">
+                                                    <i class="fa-regular fa-image fa-2xl"></i>
+                                                </div>
+                                                <div class="title">
+                                                    <p>Ваше имя</p>
+                                                </div>
+                                                <div class="divider__top"></div>
+                                                <div class="descr">
+                                                    <p>Описание</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="block__form">
+                                                <div class="org link">
+                                                    <p><i class="fa-solid fa-building"></i><span>Организация</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="tel link">
+                                                    <p><i class="fa-solid fa-phone"></i><span>Телефон</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="mail link">
+                                                    <p><i class="fa-solid fa-envelope"></i><span>Почта</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="website link">
+                                                    <p><i class="fa-solid fa-earth-americas"></i><span>Вебсайт</span>
+                                                    </p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="tg link">
+                                                    <p><i class="fa-solid fa-paper-plane"></i><span>Telegram</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="wa link">
+                                                    <p><i class="fa-brands fa-square-whatsapp"></i><span>WhatsApp</span>
+                                                    </p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="qr">
+                                                <i class="fa-solid fa-qrcode fa-2xl"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide brown" data-color="brown">
+                                        <div class="block block__brown">
+                                            <div class="block__top">
+                                                <div class="block__img">
+                                                    <i class="fa-regular fa-image fa-2xl"></i>
+                                                </div>
+                                                <div class="title">
+                                                    <p>Ваше имя</p>
+                                                </div>
+                                                <div class="divider__top"></div>
+                                                <div class="descr">
+                                                    <p>Описание</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="block__form">
+                                                <div class="org link">
+                                                    <p><i class="fa-solid fa-building"></i><span>Организация</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="tel link">
+                                                    <p><i class="fa-solid fa-phone"></i><span>Телефон</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="mail link">
+                                                    <p><i class="fa-solid fa-envelope"></i><span>Почта</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="website link">
+                                                    <p><i class="fa-solid fa-earth-americas"></i><span>Вебсайт</span>
+                                                    </p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="tg link">
+                                                    <p><i class="fa-solid fa-paper-plane"></i><span>Telegram</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="wa link">
+                                                    <p><i class="fa-brands fa-square-whatsapp"></i><span>WhatsApp</span>
+                                                    </p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                            </div>
+                                            <div class="qr">
+                                                <i class="fa-solid fa-qrcode fa-2xl"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide orange" data-color="orange">
+                                        <div class="block block__orange">
+                                            <div class="block__top">
+                                                <div class="block__img">
+                                                    <i class="fa-regular fa-image fa-2xl"></i>
+                                                </div>
+                                                <div class="title">
+                                                    <p>Ваше имя</p>
+                                                </div>
+                                                <div class="divider__top"></div>
+                                                <div class="descr">
+                                                    <p>Описание</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="block__form">
+                                                <div class="org link">
+                                                    <p><i class="fa-solid fa-building"></i><span>Организация</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="tel link">
+                                                    <p><i class="fa-solid fa-phone"></i><span>Телефон</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="mail link">
+                                                    <p><i class="fa-solid fa-envelope"></i><span>Почта</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="website link">
+                                                    <p><i class="fa-solid fa-earth-americas"></i><span>Вебсайт</span>
+                                                    </p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="tg link">
+                                                    <p><i class="fa-solid fa-paper-plane"></i><span>Telegram</span></p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                                <div class="wa link">
+                                                    <p><i class="fa-brands fa-square-whatsapp"></i><span>WhatsApp</span>
+                                                    </p>
+                                                    <div class="divider"></div>
+                                                </div>
+                                            </div>
+                                            <div class="qr">
+                                                <i class="fa-solid fa-qrcode fa-2xl"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="help">
+                                    <p>Свайпните, чтобы просмотреть все шаблоны, а затем просто остановитесь на понравившемся.</p>
+                                </div>
+                                <div class="help__sm" style="display: none;">
+                                    <p>Чтобы выбрать шаблон - остановитесь на нем.</p>
+                                </div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+
+
+                            <input type="hidden" id="selectedCardColorField" name="selectedCardColor" value="">
+                            <button class="next slider__btn">Далее</button>
+                        </div>
+
+                        <div class="name__descr form-step">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" name="name" id="name" class="top" placeholder="Иван Иванович Иванов" autocomplete="name" required>
+
+                            <label for="descr">Описание</label>
+                            <input type="text" name="descr" id="descr" placeholder="Предприниматель из Москвы">
+
+
+                            <button class="prev">Назад</button>
+                            <button class="next">Далее</button>
+                            <div class="error-message" style="display: none; color: #5c5cd6;">Пожалуйста, укажите ваше имя.</div>
+                        </div>
+
+                        <div class="org__tel form-step" style="display: none;">
+                            <label for="org">Организация</label>
+                            <input type="text" name="org" id="org" class="top" autocomplete="organization" placeholder="ИП Иванов">
+
+                            <label for="tel">Телефон</label>
+                            <input type="tel" name="tel" id="tel" inputmode="tel" autocomplete="tel" placeholder="7 (999) 999 99 99">
+
+                            <button class="prev">Назад</button>
+                            <button class="next">Далее</button>
+                        </div>
+
+                        <div class="email__website form-step" style="display: none;">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" inputmode="email" class="top"
+                                autocomplete="email" required placeholder="ivanov@mail.ru">
+
+                            <label for="url">Вебсайт</label>
+                            <input type="url" name="url" id="url" inputmode="url" autocomplete="url" placeholder="ivanov.ru">
+
+                            <button class="prev">Назад</button>
+                            <button class="next">Далее</button>
+
+                            <div class="error-message" style="display: none; color: #5c5cd6;">Пожалуйста, введите действительный адрес электронной почты.</div>
+                        </div>
+
+                        <div class="tg__wa form-step" style="display: none;">
+                            <label for="tg">Telegram</label>
+                            <input type="text" name="tg" id="tg" inputmode="email" class="top" required placeholder="@ivanov">
+
+                            <label for="wa">WhatsApp</label>
+                            <input type="tel" name="wa" id="wa" inputmode="tel" autocomplete="tel" placeholder="7 (999) 999 99 99">
+
+                            <button class="prev">Назад</button>
+                            <button class="next">Далее</button>
+
+                            <div class="error-message" style="display: none; color: #5c5cd6;">Пожалуйста, укажите ваш аккаунт Telegram.</div>
+                        </div>
+
+                        <div class="file form-step" style="display: none;">
+                            <label class="file__title" for="file">Фотография</label>
+                            <div class="example-2">
+                                <div class="form-group">
+                                    <input type="file" name="file" id="file"
+                                    accept=".jpg, .jpeg, .png, .svg, .bmp, .webp, .heic" class="input-file">
+                                    <label for="file" class="btn btn-tertiary js-labelFile">
+                                        <i class="icon fa fa-check"></i>
+                                        <span class="js-fileName">Загрузить файл</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="format">*Формат фотографии: jpg, jpeg, png, svg, bmp, webp, heic."</p>
+                            <button class="prev">Назад</button>
+                            <button type="submit" class="last__btn">Отправить</button>
+                        </div>
+
+                        
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="container-fluid d-none d-lg-block">
+        <div class="row justify-content-center justify-content-lg-end">
+            <div class="col-12 col-lg-auto text-center text-lg-end">
+                <div class="links__container col-12">
+                    <a href="policy.html" class="d-inline-block me-3 me-md-0 mb-2 mb-md-0">Политика конфиденциальности</a>
+                    <a href="rules.html" class="d-inline-block">Правила и требования к контенту</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    
+    <script src="https://kit.fontawesome.com/98b70eee36.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"
+        integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.11.0/validator.min.js"
+        integrity="sha512-hbPvueZAJx8GdjaqfRAA7FEz9UahrMeTaePHz/LDMDvDQaGSGxavizrTmww82nQmtfCUFW7wL9QmtTq8X/qM5A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../assets/js/create.js"></script>
+</body>
+
+</html>

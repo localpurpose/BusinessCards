@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --font-scale: 1.333;
+    --p: 1rem;
+    --h5: calc(var(--p) * var(--font-scale));
+    --h4: calc(var(--h5) * var(--font-scale));
+    --h3: calc(var(--h4) * var(--font-scale));
+    --h2: calc(var(--h3) * var(--font-scale));
+    --h1: calc(var(--h2) * var(--font-scale));
+    --small: calc(var(--p) / var(--font-scale));
+    --border1: 1rem;
+    --border05: 0.5rem;
+    --noto: 'Noto Sans', sans-serif;
+    --text: #071d0d;
+    --background: #fbfefc;
+    --primary: #3ed06c;
+    --primary2: rgba(62, 208, 108, 0.3);
+    --secondary: #98bae6;
+    --accent: #5c5cd6;
+    --secondary30: hsl(214, 61%, 75%, 30%);
+    --linearPrimarySecondary: linear-gradient(#3ed06c, #98bae6);
+    --linearPrimaryAccent: linear-gradient(#3ed06c, #5c5cd6);
+    --linearSecondaryAccent: linear-gradient(#98bae6, #5c5cd6);
+    --radialPrimarySecondary: radial-gradient(#3ed06c, #98bae6);
+    --radialPrimaryAccent: radial-gradient(#3ed06c, #5c5cd6);
+    --radialSecondaryAccent: radial-gradient(#98bae6, #5c5cd6);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 3px;
+    background-color: rgba(131, 131, 131, 0.1);
+    margin-left: 1em;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(129, 129, 129, 0.9);
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    /* Изменено прозрачность на 0.9 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* Добавлен z-index для уверенности, что лоадер будет наверху */
+}
+
+.loader::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    margin-top: -30px;
+    margin-left: -30px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    /* Изменен цвет границы на основной цвет */
+    border-top-color: transparent;
+    animation: loader-animation 1s linear infinite;
+    /* Добавлена анимация */
+}
+
+@keyframes loader-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+body,
+html {
+    background-color: var(--background);
+    font-family: var(--noto);
+    scroll-behavior: smooth;
+    color: var(--text);
+}
+
+/* header */
+.border-bottom {
+    border-bottom: 2px var(--bs-border-style) var(--primary2) !important;
+
+}
+
+header span {
+    font-size: 27px !important;
+    background: linear-gradient(120deg, var(--primary), var(--accent));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* main section */
+.main__section img {
+    margin-right: 0 !important;
+}
+
+.main__section .main__title {
+    font-size: var(--h1);
+    letter-spacing: 0;
+    font-weight: 600;
+}
+
+.main__section .main__title span {
+    background: linear-gradient(120deg, var(--primary), var(--accent));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.main__section .main__subtitle {
+    font-size: var(--h3) !important;
+    letter-spacing: normal;
+    margin-bottom: 0;
+}
+
+.main__section .main__descr {
+    font-size: var(--p) !important;
+    letter-spacing: normal;
+    margin-top: 30px;
+    margin-bottom: 35px;
+}
+
+.main__section .btn__text {
+    display: block;
+    background-color: var(--secondary30);
+    color: var(--text);
+    border-radius: var(--border05);
+    display: inline-block;
+    font-size: var(--p);
+    z-index: 1;
+    cursor: pointer;
+    transition: transform ease 0.2s;
+    white-space: nowrap;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.main__section .btn__text:hover {
+    transform: translate(0, -3px);
+    box-shadow: 0 20px 80px -10px var(--secondary);
+}
+
+.main__section .btn__create {
+    display: block;
+    background-color: var(--primary);
+    color: white;
+    border-radius: var(--border05);
+    transition: transform ease 0.2s, box-shadow ease 0.2s;
+    display: inline-block;
+    font-size: var(--p);
+    z-index: 2;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.main__section .btn__create:hover {
+    transform: translate(0, -3px);
+    box-shadow: 0 20px 80px -10px var(--primary);
+}
+
+/* about__section */
+.about__section {
+    background: url(../img/background.svg) center center/cover no-repeat;
+    height: 110vh;
+    /* Оставляем минимальную высоту, если контент меньше */
+    padding-bottom: 50px;
+    /* Добавляем отступ внизу секции */
+}
+
+.about__section .title__container {
+    margin-top: 30px;
+    padding-top: 150px;
+}
+
+.about__section .title__container .about__title {
+    font-size: var(--h2);
+    letter-spacing: 0;
+    font-weight: 600;
+    text-align: center;
+}
+
+.about__section .title__container .about__gradient {
+    background: linear-gradient(120deg, var(--primary), var(--accent));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about__section .cards__container {
+    margin-top: 100px;
+}
+
+.about__section .cards__container .card {
+    background-color: var(--background);
+    min-height: 250px;
+    border-radius: var(--border1);
+    border: none;
+    -webkit-box-shadow: 4px 4px 8px 4px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 4px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 4px rgba(34, 60, 80, 0.2);
+}
+
+.about__section .cards__container .card .card-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about__section .cards__container .card .card-title i {
+    padding: 5px;
+    font-size: 30px;
+}
+
+.about__section .cards__container .card .card-title h5 {
+    padding: 5px 0px 0px 5px;
+    color: var(--accent);
+    font-size: 26px;
+    background: linear-gradient(120deg, var(--primary), var(--accent));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about__section .cards__container .card .card-title .v__gradient {
+    background: linear-gradient(240deg, var(--primary), var(--accent));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about__section .cards__container .card .card-text {
+    color: var(--accent);
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px;
+    margin-top: 25px;
+
+}
+
+/* footer */
+footer .container ul li {
+    margin-top: 5px;
+    padding: 0 5px;
+}
+
+footer .nav-link {
+    font-size: 17px !important;
+    color: var(--accent) !important;
+    margin-bottom: 5px;
+
+}
+
+footer a {
+    margin-bottom: 16px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer a span {
+    font-size: 27px;
+    background: linear-gradient(120deg, var(--primary), var(--accent));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+footer a i {
+    padding-right: 7px;
+    font-size: 18px;
+}

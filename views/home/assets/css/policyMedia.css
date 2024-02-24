@@ -1,0 +1,8 @@
+@media (max-width: 576px) {
+    .container .policy__title{
+        font-size: 22px;
+    }
+    a {
+        word-break: break-all;
+      }
+}

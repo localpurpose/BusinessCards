@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Страница не найдена</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Создайте впечатляющие онлайн бизнес визитки всего за несколько простых шагов с нашим сервисом. Позвольте вашему бренду выделиться среди конкурентов..">
+    <meta name="keywords" content="онлайн визитка, создать онлайн визитку, бизнес визитка, визитка, создать визитку, веб-визитка, веб визитка, визитка бот, visitka bot, visitkabot">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;300;400;500;600;700;800;900&display=swap">
+    <style>
+        :root {
+            --font-scale: 1.333;
+            --p: 1rem;
+            --h5: calc(var(--p) * var(--font-scale));
+            --h4: calc(var(--h5) * var(--font-scale));
+            --h3: calc(var(--h4) * var(--font-scale));
+            --h2: calc(var(--h3) * var(--font-scale));
+            --h1: calc(var(--h2) * var(--font-scale));
+            --small: calc(var(--p) / var(--font-scale));
+            --noto: 'Noto Sans', sans-serif;
+            --text: #071d0d;
+            --background: #fbfefc;
+            --primary: #3ed06c;
+            --secondary: #98bae6;
+            --accent: #5c5cd6;
+        }
+
+        body{
+            font-family: var(--noto);
+            color: var(--text);
+            background-color: var(--background);
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100dvh;
+            text-align: center;
+        }
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .loader::before {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            margin-top: -30px;
+            margin-left: -30px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            border-top-color: transparent;
+            animation: loader-animation 1s linear infinite;
+        }
+
+        @keyframes loader-animation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .return__container {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+        }
+
+        .content {
+            max-width: 800px;
+            margin-top: -70px;
+        }
+
+        h1 {
+            font-size: var(--h1);
+            margin-bottom: var(--p);
+        }
+        h1 span, p span {
+            background: linear-gradient(125deg, var(--accent), var(--primary)); /* Градиент сверху вниз для заголовка и абзаца */
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        @media screen and (max-width: 768px) {
+            body {
+                padding: var(--p);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="loader"></div>
+        <div class="return__container">
+            <a href="/" aria-label="quit">
+                <i class="fa-solid fa-right-from-bracket fa-flip-horizontal fa-2xl" style="color: #5c5cd6;"></i>
+            </a>
+        </div>
+        <div class="content">
+            <h1><span>Ошибка 404</span></h1>
+            <p><span>К сожалению, запрашиваемая вами страница не найдена</span></p>
+        </div>
+    </main>
+    <script src="https://kit.fontawesome.com/98b70eee36.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var loader = document.querySelector('.loader');
+
+            if (loader) {
+
+                window.addEventListener('load', function () {
+                    loader.style.display = 'none';
+                });
+
+                window.addEventListener('error', function () {
+                    loader.style.display = 'none';
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

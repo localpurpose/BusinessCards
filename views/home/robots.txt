@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /views/404.html
+Disallow: /views/policy.html
+Disallow: /views/rules.html
+Allow: /index.html
+Allow: /views/create.html
