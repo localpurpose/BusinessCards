@@ -42,11 +42,4 @@ func SetupDefaultRoutes(app *fiber.App) {
 	app.Get("/", controller.RenderMain)
 	app.Get("/user/:userid", controller.RenderUserProfile)
 
-	//------------------------------------------------
-	// 404 Middleware
-	//------------------------------------------------
-	app.Use(func(c *fiber.Ctx) error {
-		return c.Render("home/404", nil) // => 404 "Not Found"
-	})
-
 }

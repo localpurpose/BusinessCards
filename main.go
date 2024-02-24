@@ -32,6 +32,13 @@ func main() {
 
 	routes.SetupDefaultRoutes(app)
 
+	//------------------------------------------------
+	// 404 Middleware
+	//------------------------------------------------
+	app.Use(func(c *fiber.Ctx) error {
+		return c.Render("home/404", nil) // => 404 "Not Found"
+	})
+
 	m := &autocert.Manager{
 		Prompt:     autocert.AcceptTOS,
 		HostPolicy: autocert.HostWhitelist("visitkabot.ru"),
