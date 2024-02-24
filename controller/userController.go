@@ -311,7 +311,7 @@ func UploadImage(c *fiber.Ctx) error {
 Registration quest rendering function.
 */
 func RenderRegister(c *fiber.Ctx) error {
-	return c.Render("registration/index", nil)
+	return c.Render("home/views/create", nil)
 }
 
 /*
@@ -362,5 +362,5 @@ func DoRegister(c *fiber.Ctx) error {
 Main page rendering function.
 */
 func RenderMain(c *fiber.Ctx) error {
-	return c.Render("mainPage/index", nil)
+	return c.Render("home/index", nil)
 }
