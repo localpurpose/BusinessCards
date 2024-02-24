@@ -218,7 +218,7 @@ func RenderUserProfile(c *fiber.Ctx) error {
 		"WhatsApp":     user.WhatsApp,
 		"ImageDir":     user.QrPath,
 	}
-
+	log.Info(userDataMap)
 	if utils.PathExists(path + "/image.png") {
 		userDataMap["ImageDir1"] = user.QrPath + "/image.png"
 	}
@@ -355,7 +355,7 @@ func DoRegister(c *fiber.Ctx) error {
 		log.Info(err)
 	}
 	log.Info(user.Name)
-	return c.Redirect("/" + strconv.Itoa(int(user.Id)))
+	return c.Redirect("/user/" + strconv.Itoa(int(user.Id)))
 }
 
 /*
