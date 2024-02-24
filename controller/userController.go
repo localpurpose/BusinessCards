@@ -13,6 +13,9 @@ import (
 	"time"
 )
 
+/*
+Function cathes all POST requests and add new ser to the database
+*/
 func CreateUser(c *fiber.Ctx) error {
 
 	var data map[string]string
@@ -72,6 +75,10 @@ func CreateUser(c *fiber.Ctx) error {
 	})
 
 }
+
+/*
+Edit user profile function. POST request.
+*/
 func EditUser(c *fiber.Ctx) error {
 
 	userId := c.Params("userid")
@@ -109,6 +116,9 @@ func EditUser(c *fiber.Ctx) error {
 	})
 }
 
+/*
+Function that cathes all POST requests, userid and token requiered.
+*/
 func DeleteUser(c *fiber.Ctx) error {
 	userId := c.Params("userid")
 	var user models.User
@@ -127,6 +137,11 @@ func DeleteUser(c *fiber.Ctx) error {
 		"message": "User deleted successfully!",
 	})
 }
+
+/*
+Function that cathes all GET requests to /api/user/:userid.
+Return details about user from its userid.
+*/
 func GetDetails(c *fiber.Ctx) error {
 
 	userId := c.Params("userid")
@@ -156,76 +171,24 @@ func GetDetails(c *fiber.Ctx) error {
 	})
 }
 
-/*func InsertTheme(c *fiber.Ctx) error {
-
-	var data map[string]string
-
-	err := c.BodyParser(&data)
-	if err != nil {
-		return c.Status(400).JSON(
-			fiber.Map{
-				"success": false,
-				"message": "Invalid data",
-			})
-	}
-
-	if data["user_id"] == "" {
-		return c.Status(400).JSON(
-			fiber.Map{
-				"success": false,
-				"message": "Invalid data. User ID is required.",
-			})
-	}
-	if data["theme"] == "" {
-		return c.Status(400).JSON(
-			fiber.Map{
-				"success": false,
-				"message": "Invalid data. User Theme is required.",
-			})
-	}
-
-	user_id, err := strconv.ParseInt(data["user_id"], 10, 64)
-	if err != nil {
-		log.Info(err)
-	}
-
-	theme := models.User{
-		Id:    uint(user_id),
-		Theme: data["theme"],
-	}
-
-	db.DB.Create(&theme)
-
-	return c.Status(200).JSON(fiber.Map{
-		"success": true,
-		"message": "Theme Details",
-		"data":    theme,
-	})
-}*/
-
+/*
+User`s profile rendering function.
+*/
 func RenderUserProfile(c *fiber.Ctx) error {
 	userId := c.Params("userid")
 	var user models.User
 	var path string
 
 	db.DB.Select("id, name, telegram_name, organization, phone_number, email, web_site, whats_app, description, qr_path, theme").Where("id = ?", userId).First(&user)
-	log.Info(user.Id)
+
 	if user.Id == 0 {
-		err := c.Redirect("/1")
-		if err != nil {
-			log.Info(err)
-		}
-		return c.Status(404).JSON(fiber.Map{
-			"success": false,
-			"message": "User not found",
-			"error":   map[string]interface{}{},
-		})
+		return c.Redirect("/")
 	}
 
 	path = "usersData/" + userId
 	if !utils.PathExists(path) {
 		err := os.Mkdir(path, 0600)
-		utils.QrGenerate(user.Theme, "https://visitkabot.ru/"+strconv.FormatUint(uint64(user.Id), 10), path)
+		utils.QrGenerate(user.Theme, "https://visitkabot.ru/user/"+strconv.FormatUint(uint64(user.Id), 10), path)
 		if err != nil {
 			log.Info(err)
 		}
@@ -237,7 +200,7 @@ func RenderUserProfile(c *fiber.Ctx) error {
 		if err != nil {
 			log.Info(err)
 		}
-		utils.QrGenerate(user.Theme, "https://visitkabot.ru/"+strconv.FormatUint(uint64(user.Id), 10), path)
+		utils.QrGenerate(user.Theme, "https://visitkabot.ru/user/"+strconv.FormatUint(uint64(user.Id), 10), path)
 
 		user.QrPath = strings.Split(path, "/")[1]
 		db.DB.Save(&user)
@@ -276,6 +239,10 @@ func RenderUserProfile(c *fiber.Ctx) error {
 	return nil
 }
 
+/*
+Function that cathces requests to /api/uploadimage.
+Image b64 and userid requiered.
+*/
 func UploadImage(c *fiber.Ctx) error {
 
 	var data map[string]string
@@ -338,4 +305,62 @@ func UploadImage(c *fiber.Ctx) error {
 		"message": "Image upload successfully!",
 		"error":   map[string]interface{}{},
 	})
+}
+
+/*
+Registration quest rendering function.
+*/
+func RenderRegister(c *fiber.Ctx) error {
+	return c.Render("registration/index", nil)
+}
+
+/*
+Function that cathces POST request to visitkabot.ru/createuser.
+User model required!
+*/
+func DoRegister(c *fiber.Ctx) error {
+
+	// Валидация проводится на фронтенде
+
+	user := models.User{
+		Name:         c.FormValue("name"),
+		Description:  c.FormValue("descr"),
+		Organization: c.FormValue("org"),
+		PhoneNumber:  c.FormValue("phone"),
+		Email:        c.FormValue("email"),
+		WebSite:      c.FormValue("website"),
+		TelegramName: c.FormValue("tg"),
+		WhatsApp:     c.FormValue("wa"),
+		Theme:        c.FormValue("theme"),
+		CreatedAt:    time.Now().String(),
+		LastUpdate:   time.Now().String(),
+	}
+
+	db.DB.Create(&user)
+	//Создание директории пользователя
+	path := "usersData/" + strconv.Itoa(int(user.Id))
+	if !utils.PathExists(path) {
+		err := os.Mkdir(path, 0600)
+		if err != nil {
+			log.Info(err)
+		}
+	}
+	//Получаем фото из формы
+	photo, err := c.FormFile("photo")
+	if err != nil {
+		log.Info(err)
+	}
+	//Сохранение фото пользователя в его директорию
+	if err := c.SaveFile(photo, path+"/image.png"); err != nil {
+		log.Info(err)
+	}
+	log.Info(user.Name)
+	return c.Redirect("/" + strconv.Itoa(int(user.Id)))
+}
+
+/*
+Main page rendering function.
+*/
+func RenderMain(c *fiber.Ctx) error {
+	return c.Render("mainPage/index", nil)
 }

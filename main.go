@@ -17,11 +17,18 @@ func main() {
 
 	engine := html.New("./views", ".html")
 	app := fiber.New(fiber.Config{Views: engine})
+	//Static Views Files
 	app.Static("assets/brownView/", "./views/brownView/assets")
 	app.Static("assets/blueView/", "./views/blueView/assets")
 	app.Static("assets/orangeView/", "./views/orangeView/assets")
 	app.Static("assets/pinkView/", "./views/pinkView/assets")
 	app.Static("assets/qrs/", "./usersData")
+
+	//Static Main Page files
+	app.Static("assets/main/", "./views/mainPage/assets")
+
+	//Static Registration files
+	app.Static("assets/reg/", "./views/registration/assets")
 
 	routes.SetupDefaultRoutes(app)
 
