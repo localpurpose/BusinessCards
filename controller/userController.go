@@ -331,11 +331,11 @@ func DoRegister(c *fiber.Ctx) error {
 		WebSite:      c.FormValue("website"),
 		TelegramName: c.FormValue("tg"),
 		WhatsApp:     c.FormValue("wa"),
-		Theme:        c.FormValue("theme"),
+		Theme:        c.FormValue("selectedCardColor"),
 		CreatedAt:    time.Now().String(),
 		LastUpdate:   time.Now().String(),
 	}
-
+	log.Info(user)
 	db.DB.Create(&user)
 	//Создание директории пользователя
 	path := "usersData/" + strconv.Itoa(int(user.Id))
