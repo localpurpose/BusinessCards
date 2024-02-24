@@ -346,7 +346,7 @@ func DoRegister(c *fiber.Ctx) error {
 		}
 	}
 	//Получаем фото из формы
-	photo, err := c.FormFile("photo")
+	photo, err := c.FormFile("file")
 	if err != nil {
 		log.Info(err)
 	}
