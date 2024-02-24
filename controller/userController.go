@@ -340,7 +340,7 @@ func DoRegister(c *fiber.Ctx) error {
 	//Создание директории пользователя
 	path := "usersData/" + strconv.Itoa(int(user.Id))
 	if !utils.PathExists(path) {
-		err := os.Mkdir(path, 0600)
+		err := os.MkdirAll(path, 0600)
 		if err != nil {
 			log.Info(err)
 		}
