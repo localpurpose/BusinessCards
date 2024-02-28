@@ -12,12 +12,6 @@ type (
 )
 
 func SetupDefaultRoutes(app *fiber.App) {
-	//------------------------------------------------
-	// HTTP REDIRECTS TO HTTPS
-	//------------------------------------------------
-	app.Get("/*", func(c *fiber.Ctx) error {
-		return c.Redirect("https://" + c.Hostname() + c.Path())
-	})
 
 	//------------------------------------------------
 	// Main Application
@@ -49,5 +43,12 @@ func SetupDefaultRoutes(app *fiber.App) {
 
 	//Upload Image Handler.
 	app.Post("/api/uploadimage", controller.UploadImage)
+
+	//------------------------------------------------
+	// HTTP REDIRECTS TO HTTPS
+	//------------------------------------------------
+	app.Get("/*", func(c *fiber.Ctx) error {
+		return c.Redirect("https://" + c.Hostname() + c.Path())
+	})
 
 }
