@@ -16,7 +16,7 @@ func SetupDefaultRoutes(app *fiber.App) {
 	// HTTP REDIRECTS TO HTTPS
 	//------------------------------------------------
 	app.Get("/*", func(c *fiber.Ctx) error {
-		return c.Redirect("https://" + c.Hostname())
+		return c.Redirect("https://" + c.Hostname() + c.Path())
 	})
 
 	//------------------------------------------------
